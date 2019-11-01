@@ -10,7 +10,7 @@ import firebase from 'firebase'
     checkIfLoggedIn = () => {
         firebase.auth().onAuthStateChanged(function(user){
             if(user){
-                this.props.navigation.navigate('DashboardScreen')
+                this.props.navigation.navigate('Index')
             }
             else{
                 this.props.navigation.navigate('LoginScreen')

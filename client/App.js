@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createAppContainer ,createSwitchNavigator } from 'react-navigation'
 
-import LoginScreen from './components/LoginScreen'
-import LoadingScreen from './components/LoadingScreen'
-import DashboardScreen from './components/DashboardScreen'
+import LoginScreen from './Components/LoginScreen'
+import LoadingScreen from './Components/LoadingScreen'
+import Index from './Components/Index'
 
 import firebase from 'firebase'
 import {firebaseConfig} from './config'
@@ -19,7 +19,7 @@ export default class App extends Component {
 const AppSwitchNavigator = createSwitchNavigator({
   LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,
-  DashboardScreen: DashboardScreen // 메인
+  Index: Index // 메인
 })
 
 const AppNavigator = createAppContainer(AppSwitchNavigator);

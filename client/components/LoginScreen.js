@@ -4,6 +4,7 @@ import * as Google from "expo-google-app-auth";
 import firebase from "firebase";
 
 class LoginScreen extends Component {
+  //firebase에 있는 유저와 구글을 통해 로그인하려는 유저가 동일한지 확인
   isUserEqual = (googleUser, firebaseUser) => {
     if (firebaseUser) {
       var providerData = firebaseUser.providerData;
@@ -13,13 +14,14 @@ class LoginScreen extends Component {
             firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
           providerData[i].uid === googleUser.getBasicProfile().getId()
         ) {
-          // We don't need to reauth the Firebase connection.
           return true;
         }
       }
     }
     return false;
   };
+
+  //로그인할 경우 데이터베이스에 유저데이터 POST 요청
   onSignIn = googleUser => {
     console.log("Google Auth Response", googleUser);
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.

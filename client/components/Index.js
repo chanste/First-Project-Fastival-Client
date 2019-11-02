@@ -50,7 +50,7 @@ const MapStack = createStackNavigator(
       })
   }
 );
-const ChatboxStack = createStackNavigator(
+const ChatboxStack = createSwitchNavigator(
   {
     Chatbox
   },

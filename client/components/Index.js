@@ -26,7 +26,7 @@ const UserConcertStack = createStackNavigator(
   },
   {
       defaultNavigationOptions: ({navigation}) => ({
-          title: '내 공연',
+          title: '내 공연!!!!!!',
       })
   }
 );

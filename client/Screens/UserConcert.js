@@ -4,7 +4,7 @@ export default class UserConcert extends React.Component {
     render() {
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>UserConcert!!</Text>
+          <Text>UserConcert</Text>
         </View>
       );
     }

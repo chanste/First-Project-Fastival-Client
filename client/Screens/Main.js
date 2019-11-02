@@ -8,25 +8,6 @@ import { createStackNavigator } from "react-navigation-stack";
 
 import { getAllFestivals, getUserFestivals } from "../Fetch/Fetches";
 
-const dummyDatas = [
-  {
-    festival_Id: 1,
-    name: "거리축제",
-    img_url:
-      "https://www.mcst.go.kr/attachFiles/cultureInfoCourt/localFestival/notifyFestival/1512953371989.jpg"
-  },
-  {
-    festival_Id: 2,
-    name: "X게임",
-    img_url: "https://i.ytimg.com/vi/eUqvfODmvHI/maxresdefault.jpg"
-  },
-  {
-    festival_Id: 3,
-    name: "Sausage Party",
-    img_url: "https://friendzhelp.files.wordpress.com/2011/10/sad-gamers.jpg"
-  }
-];
-
 //Get=[{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
 class MainScreen extends React.Component {
   constructor(props) {
@@ -103,7 +84,6 @@ const AppStackNavigator = createStackNavigator(
   {
     Main: MainScreen,
     SearchPage: SearchPage,
-    userConcert: "something"
   },
   { initialRouteName: "Main" }
 );

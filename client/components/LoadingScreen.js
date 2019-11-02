@@ -10,7 +10,7 @@ import firebase from 'firebase'
     checkIfLoggedIn = () => {
         firebase.auth().onAuthStateChanged(function(user){
             if(user){
-                this.props.navigation.navigate('Index') //이 부분을 현구님 부분에 연결
+                this.props.navigation.navigate('Main') //이 부분을 현구님 부분에 연결
             }
             else{
                 this.props.navigation.navigate('LoginScreen')

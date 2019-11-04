@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { StyleSheet, View, Button, FlatList, Text, Image } from "react-native";
 import SearchPage from "./SearchPage";
 import UserConcert from "./UserConcert";
-import Remover from "../Components/Remover";
+import Remover from "../Eachcomponents/Remover";
 
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
 import { getAllFestivals, getUserFestivals } from "../Fetch/Fetches";
+import Index from "../Eachcomponents/Index";
 
 const dummyDatas = [
   {
@@ -80,6 +81,7 @@ class MainScreen extends React.Component {
   //유저 festivalList 정보를 불러오고, state 업데이트
   setUserFestivals(data) {
     const newUserFestivals = data.slice();
+    //이건 읽어보자
     for (let i = 0; i < newUserFestivals.length; i++) {
       newUserFestivals[i].user_Id = this.state.user_Id;
     }
@@ -97,7 +99,7 @@ class MainScreen extends React.Component {
 
     this.props.screenProps.setSelectedFestival(item);
 
-    this.props.navigation.navigate("FestivalPage");
+    this.props.navigation.navigate("Index");
   }
 
   Item({ item }) {
@@ -176,13 +178,13 @@ const AppStackNavigator = createStackNavigator(
 
 //Festival페이지와 Concert페이지 라우팅.
 const UserFestivalNavigator = createSwitchNavigator({
-  FestivalPage: UserConcert
+  Index: Index
 });
 const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
       FestivalSelect: AppStackNavigator,
-      ConcertSelect: UserFestivalNavigator
+      Index: UserFestivalNavigator
     },
     { initialRouteName: "FestivalSelect" }
   )
@@ -208,14 +210,14 @@ export default class Main extends Component {
 
   //get해온 각 데이터에 유저 ID속성 추가 및 state에 새로운 데이터 추가.
   setFestivlas(data) {
-    // const newFestivals = data.slice();
-    // for (let i = 0; i < newFestivals.length; i++) {
-    //   newFestivals[i].user_Id = this.state.user_Id;
-    // }
-    // this.setState({
-    //   ...this.state,
-    //   festivals: newFestivals
-    // });
+    const newFestivals = data.slice();
+    for (let i = 0; i < newFestivals.length; i++) {
+      newFestivals[i].user_Id = this.state.user_Id;
+    }
+    this.setState({
+      ...this.state,
+      festivals: newFestivals
+    });
     // this.setState({
     //   ...this.state,
     //   festivals: dummyDatas

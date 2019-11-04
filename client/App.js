@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createAppContainer ,createSwitchNavigator } from 'react-navigation'
 
-import LoginScreen from './Components/LoginScreen'
-import LoadingScreen from './Components/LoadingScreen'
-import Index from './Components/Index'
+import LoginScreen from './Eachcomponents/LoginScreen'
+import LoadingScreen from './Eachcomponents/LoadingScreen'
+// import Index from './Eachcomponents/Index'
 import Main from './Screens/Main'
 
 import firebase from 'firebase'

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { GiftedChat } from "react-native-gifted-chat";
 import emojiUtils from "emoji-utils";
 import firebase from "firebase";
-import SlackMessage from "../Components/SlackMessage";
+import SlackMessage from "../Eachcomponents/SlackMessage";
 
 export default class Chatbox extends React.Component {
   state = {
@@ -92,4 +92,4 @@ export default class Chatbox extends React.Component {
   }
 }
 
-//<Button title="Sign out" onPress={() => firebase.auth().signOut()} />
+

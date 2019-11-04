@@ -7,7 +7,7 @@ import {
   FlatList,
   Image
 } from "react-native";
-import Adder from "../Components/Adder";
+import Adder from "../Eachcomponents/Adder";
 
 //Get [{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
 

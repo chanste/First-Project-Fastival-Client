@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import firebase from 'firebase'
 
 class Map extends React.Component {
 
@@ -26,6 +27,7 @@ class Map extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Map!!!!!!!!</Text>
+        <Button title="Sign out" onPress={() => firebase.auth().signOut()} />
       </View>
     );
   }

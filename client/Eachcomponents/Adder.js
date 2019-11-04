@@ -19,10 +19,11 @@ export default class Adder extends Component {
   addUserFestival() {
     //this.props.festival_Id를 post요청을 보내 user_ID와 fest_ID매칭
     console.log("these will be posted: ", this.props);
+    console.log("these will be posted: ", this.props);
 
     addUserFestival(this.props.user_Id, this.props.festival_Id);
-
     alert("추가되었습니다!");
+    // this.props.refresh();
   }
 
   render() {

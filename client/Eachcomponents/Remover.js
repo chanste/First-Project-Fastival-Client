@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  FlatList,
-  Button
-} from "react-native";
+import { Button } from "react-native";
 
 import { deleteUserFestival } from "../Fetch/Fetches";
 

@@ -49,6 +49,7 @@ class LoginScreen extends Component {
                 givenname : result.additionalUserInfo.profile.given_name,
                 photourl : result.user.photoURL
               }]
+              console.log("###", userInfo)
              // if (result.additionalUserInfo.isNewUser) {
                 window
                   .fetch("http://3.133.96.196:5000/users ", {

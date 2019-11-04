@@ -3,6 +3,11 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import firebase from 'firebase'
 
 class Map extends React.Component {
+  constructor(props){
+    super(props)
+  }
+  
+  
 
   // getMap = async () => {
 
@@ -18,15 +23,17 @@ class Map extends React.Component {
   //     })
   //     .then(json => {
   //       return json.map_url;
-  //     });
+  //     });  
   //   return mapUrl;
 
   // };
 
   render() {
+    console.log("daslfkjashdlkfjahdlsk", this.props.screenProps)
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>Map!!!!!!!!</Text>
+        <Text>{this.screenProps}</Text>
         <Button title="Sign out" onPress={() => firebase.auth().signOut()} />
       </View>
     );

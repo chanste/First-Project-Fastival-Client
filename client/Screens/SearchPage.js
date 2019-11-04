@@ -8,10 +8,9 @@ import {
   Image
 } from "react-native";
 import Adder from "../Eachcomponents/Adder";
+import firebase from 'firebase'
 
 //Get [{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
-
-var timer;
 
 export default class SearchPage extends Component {
   constructor(props) {
@@ -26,12 +25,11 @@ export default class SearchPage extends Component {
     currDatas: [],
     cart: [],
     userFestival: [],
-    userId: 0
+    userId: ""
   };
 
   _updateSearch = search => {
     this.setState({ search });
-    // console.log(search);
     this.textSearching(search);
   };
 
@@ -43,7 +41,7 @@ export default class SearchPage extends Component {
       ...this.state,
       datas: this.props.screenProps.festivals,
       currDatas: this.props.screenProps.festivals,
-      userId: this.props.screenProps.userId
+      user_Id: this.props.screenProps.user_Id
     });
 
     this.textSearching();
@@ -82,6 +80,7 @@ export default class SearchPage extends Component {
   }
 
   Item({ item }) {
+    const uId = firebase.auth().currentUser.uid;
     return (
       <View style={{ marginTop: 30 }}>
         {/* {console.log("SearchPage Item: ", item)} */}
@@ -92,7 +91,7 @@ export default class SearchPage extends Component {
         <Text style={{ fontSize: 20 }} onPress={() => alert("자세한 정보")}>
           {item.name}
         </Text>
-        <Adder festival_Id={item.festival_Id} user_Id={item.user_Id} />
+        <Adder festival_Id={item.festival_Id} user_Id={uId}/>
       </View>
     );
   }
@@ -114,6 +113,7 @@ export default class SearchPage extends Component {
           keyExtractor={item => {
             return "" + item.festival_Id; // this must be string
           }}
+          extraData={this.state}
         />
       </View>
     );

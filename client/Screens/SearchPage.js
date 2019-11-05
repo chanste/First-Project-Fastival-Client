@@ -8,10 +8,9 @@ import {
   Image
 } from "react-native";
 import Adder from "../Eachcomponents/Adder";
+import firebase from 'firebase'
 
 //Get [{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
-
-var timer;
 
 export default class SearchPage extends Component {
   constructor(props) {
@@ -26,12 +25,11 @@ export default class SearchPage extends Component {
     currDatas: [],
     cart: [],
     userFestival: [],
-    userId: 0
+    userId: ""
   };
 
   _updateSearch = search => {
     this.setState({ search });
-    // console.log(search);
     this.textSearching(search);
   };
 
@@ -43,9 +41,8 @@ export default class SearchPage extends Component {
       ...this.state,
       datas: this.props.screenProps.festivals,
       currDatas: this.props.screenProps.festivals,
-      userId: this.props.screenProps.userId
+      user_Id: this.props.screenProps.user_Id 
     });
-
     this.textSearching();
   }
 
@@ -63,18 +60,14 @@ export default class SearchPage extends Component {
 
   textSearching(text) {
     let currDatas = this.props.screenProps.festivals;
-
     // console.log("currDatas: ", currDatas);
-
     let filteredList = currDatas.filter(item => {
       // console.log("item: ", item);
       if (item.name.search(text) !== -1) {
         return true;
       }
     });
-
     // console.log("filteredList: ", filteredList);
-
     this.setState({
       ...this.state,
       currDatas: filteredList
@@ -82,9 +75,10 @@ export default class SearchPage extends Component {
   }
 
   Item({ item }) {
+    const uId = firebase.auth().currentUser.uid;
+    // console.log(item)
     return (
       <View style={{ marginTop: 30 }}>
-        {/* {console.log("SearchPage Item: ", item)} */}
         <Image
           style={{ width: 100, height: 100, borderRadius: 10 }}
           source={{ uri: item.img_url }}
@@ -92,13 +86,12 @@ export default class SearchPage extends Component {
         <Text style={{ fontSize: 20 }} onPress={() => alert("자세한 정보")}>
           {item.name}
         </Text>
-        <Adder festival_Id={item.festival_Id} user_Id={item.user_Id} />
+        <Adder festival_Id={item.festival_Id} user_Id={uId}/>
       </View>
     );
   }
 
   render() {
-    // console.log("myFestivalFunc: ", this.props.screenProps);
     const datas = this.state.currDatas;
     return (
       <View
@@ -114,10 +107,10 @@ export default class SearchPage extends Component {
           keyExtractor={item => {
             return "" + item.festival_Id; // this must be string
           }}
+          extraData={this.state}
         />
       </View>
     );
-    // console.log("searchValue: ", searchValue);
   }
 }
 

@@ -19,7 +19,6 @@ class Index extends Component {
     super(props)
   }
   render() {
-    console.log("aaaa", this.props.screenProps)
     return <IndexNavigator 
     screenProps={{
       user_Id : this.props.screenProps.user_Id,

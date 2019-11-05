@@ -18,12 +18,13 @@ export const addUserFestival = (user_Id, festival_Id) => {
     body: JSON.stringify(body)
   }).then(response => response.json());
 }; //문제 있음
+
 export const getUserFestivals = (user_Id, callback) => {
   console.log(server + "festivals/" + user_Id)
   fetch(server + "festivals/" + user_Id)
     .then(res => res.json())
     .then(data => callback(data))
-}; //추가가 안되서 못받아오는중
+};
 
 export const deleteUserFestival = (user_Id, festival_Id) => {
   let body = {

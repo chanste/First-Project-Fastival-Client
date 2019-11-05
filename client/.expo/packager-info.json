@@ -3,8 +3,8 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://kg-ued.anonymous.client.exp.direct",
+  "packagerNgrokUrl": "https://packager.kg-ued.anonymous.client.exp.direct",
+  "ngrokPid": 65785,
   "webpackServerPort": null
 }

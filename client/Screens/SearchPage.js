@@ -41,9 +41,8 @@ export default class SearchPage extends Component {
       ...this.state,
       datas: this.props.screenProps.festivals,
       currDatas: this.props.screenProps.festivals,
-      user_Id: this.props.screenProps.user_Id
+      user_Id: this.props.screenProps.user_Id 
     });
-
     this.textSearching();
   }
 
@@ -61,18 +60,14 @@ export default class SearchPage extends Component {
 
   textSearching(text) {
     let currDatas = this.props.screenProps.festivals;
-
     // console.log("currDatas: ", currDatas);
-
     let filteredList = currDatas.filter(item => {
       // console.log("item: ", item);
       if (item.name.search(text) !== -1) {
         return true;
       }
     });
-
     // console.log("filteredList: ", filteredList);
-
     this.setState({
       ...this.state,
       currDatas: filteredList
@@ -81,9 +76,9 @@ export default class SearchPage extends Component {
 
   Item({ item }) {
     const uId = firebase.auth().currentUser.uid;
+    // console.log(item)
     return (
       <View style={{ marginTop: 30 }}>
-        {/* {console.log("SearchPage Item: ", item)} */}
         <Image
           style={{ width: 100, height: 100, borderRadius: 10 }}
           source={{ uri: item.img_url }}
@@ -97,7 +92,6 @@ export default class SearchPage extends Component {
   }
 
   render() {
-    // console.log("myFestivalFunc: ", this.props.screenProps);
     const datas = this.state.currDatas;
     return (
       <View
@@ -117,7 +111,6 @@ export default class SearchPage extends Component {
         />
       </View>
     );
-    // console.log("searchValue: ", searchValue);
   }
 }
 

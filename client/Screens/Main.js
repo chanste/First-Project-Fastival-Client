@@ -18,6 +18,7 @@ class MainScreen extends React.Component {
     this.setUserFestivals = this.setUserFestivals.bind(this);
     this.Item = this.Item.bind(this);
     this.selectFestival = this.selectFestival.bind(this);
+    this.refresh = this.refresh.bind(this)
   }
   static navigationOptions = ({ navigation }) => {
     return {
@@ -34,8 +35,12 @@ class MainScreen extends React.Component {
   };
 
   state = {
-    userFestivals: [] //유저가 선택한 페스티벌 목록
+    userFestivals: [] 
   };
+
+  refresh(){
+    getUserFestivals(this.props.screenProps.user_Id, this.setUserFestivals);
+  }
 
   _toSearchPage() {
     this.props.navigation.navigate(`SearchPage`);
@@ -44,19 +49,20 @@ class MainScreen extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
       toSearchPage: this._toSearchPage
+    });   
+    this.focusListener = this.props.navigation.addListener('didFocus', () => {
+      getUserFestivals(this.props.screenProps.user_Id, this.setUserFestivals);
     });
-    console.log("before componentdidmount", this.props.screenProps.user_Id)
-    getUserFestivals(this.props.screenProps.user_Id, this.setUserFestivals);
-    console.log("after componentdidmount", this.state)
   }
 
   //유저 festivalList 정보를 불러오고, state 업데이트
   setUserFestivals(data) {
-    console.log("set???", data)
+    // console.log("data before setstate", data)
     this.setState({
       ...this.state,
       userFestivals: data
     });
+    // console.log("let's see the state after setting", this.state)
   }
   //페스티벌을 골랐을 때 인덱스로 넘어감
   selectFestival(item) {
@@ -77,17 +83,21 @@ class MainScreen extends React.Component {
           />
           <Text
             onPress={() => this.selectFestival(item)}
-            style={{ fontSize: 20, fontWeight: "600", margin : "10" }}
+            style={{ fontSize: 20, fontWeight: "600"}}
           >
             {item.name}
           </Text>
         </View>
-        <Remover festival_Id={item.festival_Id} user_Id={uId} />
+        <Remover festival_Id={item.festival_Id} user_Id={uId} refresh={item.refresh}/>
       </View>
     );
   }
 
   render() {
+    const datas = this.state.userFestivals;
+    for(const item of datas){
+      item.refresh = this.refresh
+    }
     return (
       <View>
         {this.state.userFestivals.length === 0 ? (
@@ -96,8 +106,8 @@ class MainScreen extends React.Component {
             onPress={() => this._toSearchPage()}
           />
         ) : (
-          <View style={styles.container}>
-            <View style={styles.container}>
+          <View style={{}}>
+            <View style={{}}>
               <View>
                 <Text
                   style={{ marginTop: 20, fontSize: 30, fontWeight: "700" }}
@@ -106,10 +116,9 @@ class MainScreen extends React.Component {
                 </Text>
               </View>
               <FlatList
-                data={this.state.userFestivals}
+                data={datas}
                 renderItem={this.Item}
                 keyExtractor={item => {
-                  // console.log("keyExtractor: ", item);
                   return "" + item.festival_Id; // this must be string
                 }}
               />
@@ -121,10 +130,13 @@ class MainScreen extends React.Component {
   }
 }
 
+//async스토리지??(리액트 로컬 스토리지)
+
+
 const AppStackNavigator = createStackNavigator(
   {
-    Main: MainScreen,
-    SearchPage: SearchPage
+    Main: MainScreen, //장바구니 
+    SearchPage: SearchPage 
   },
   { initialRouteName: "Main" }
 );
@@ -149,7 +161,6 @@ export default class Main extends Component {
     super(props);
     this.setFestivals = this.setFestivals.bind(this);
     this.setSelectedFestival = this.setSelectedFestival.bind(this);
-    this.refresh = this.refresh.bind(this)
   }
 
   state = {
@@ -177,20 +188,15 @@ export default class Main extends Component {
     });
   }
 
-  refresh() {
-    this.setState({state : this.state})
-  }
-
   render() {
-    const user_Id= firebase.auth().currentUser.uid; //로그인 된 유저 ID
+    const user_Id = firebase.auth().currentUser.uid; //로그인 된 유저 ID
     return (
       <AppContainer
         screenProps={{
-          festivals: this.state.festivals, 
+          festivals: this.state.festivals,
           user_Id: user_Id,
           selectedFestival: this.state.selectedFestival,
           setSelectedFestival: this.setSelectedFestival,
-          refresh : this.refresh
         }}
       />
     );

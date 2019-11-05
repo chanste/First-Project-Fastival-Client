@@ -42,13 +42,13 @@ class LoginScreen extends Component {
             .signInAndRetrieveDataWithCredential(credential)
             .then(function(result) {
               // console.log("user signed in ", result);
-              let userInfo = [{
-                uid : result.user.uid,
+              let userInfo = {
+                user_Id : result.user.uid,
                 email: result.additionalUserInfo.profile.email,
                 username : result.additionalUserInfo.profile.name,
                 givenname : result.additionalUserInfo.profile.given_name,
                 photourl : result.user.photoURL
-              }]
+              }
               console.log("###", userInfo)
              // if (result.additionalUserInfo.isNewUser) {
                 window

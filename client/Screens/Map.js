@@ -1,39 +1,21 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, Image } from "react-native";
 import firebase from 'firebase'
 
 class Map extends React.Component {
   constructor(props){
     super(props)
   }
-  
-  
 
-  // getMap = async () => {
-
-  //   let mapUrl = await window
-  //     .fetch("http://3.133.96.196:5000/festivals?user-id ", {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json"
-  //       }
-  //     })
-  //     .then(response => {
-  //       return response.json();
-  //     })
-  //     .then(json => {
-  //       return json.map_url;
-  //     });  
-  //   return mapUrl;
-
-  // };
 
   render() {
-    console.log("daslfkjashdlkfjahdlsk", this.props.screenProps)
+    console.log(this.props.screenProps)
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Map!!!!!!!!</Text>
-        <Text>{this.screenProps}</Text>
+        <Image
+        style={{ width: 400, height: 400, borderRadius: 20 }}
+        source={{ uri : this.props.screenProps.selectedFestival.map_url}}
+        />
         <Button title="Sign out" onPress={() => firebase.auth().signOut()} />
       </View>
     );

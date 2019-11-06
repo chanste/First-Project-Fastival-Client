@@ -1,4 +1,4 @@
-# what i installed 
+# what i installed
 
 npm install
 

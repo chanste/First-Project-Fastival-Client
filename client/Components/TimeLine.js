@@ -5,9 +5,10 @@ import {
   Image,
   View,
   Text,
-  TouchableOpacity,
-  Button
+  TouchableOpacity
 } from "react-native";
+import { addUserConcert, deleteUserConcert } from "../Fetch/Fetches";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 const ds = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
@@ -15,9 +16,9 @@ const ds = new ListView.DataSource({
 });
 
 const defaultCircleSize = 16;
-const defaultCircleColor = "#007AFF";
+const defaultCircleColor = "#FFBF00";
 const defaultLineWidth = 2;
-const defaultLineColor = "#007AFF";
+const defaultLineColor = "#D9DDDC";
 const defaultTimeTextColor = "black";
 const defaultDotColor = "white";
 const defaultInnerCircle = "none";
@@ -31,13 +32,17 @@ export default class TimeLine extends Component {
     this.renderDetail = this._renderDetail.bind(this);
     this.renderCircle = this._renderCircle.bind(this);
     this.renderEvent = this._renderEvent.bind(this);
+    this._timeGapCalculator = this._timeGapCalculator.bind(this);
+    this._dynamicLineLength = this._dynamicLineLength.bind(this);
+    this._showConcertInfos = this._showConcertInfos.bind(this);
 
     this.state = {
       data: this.props.data,
       dataSource: ds.cloneWithRows(this.props.data),
       x: 0,
       width: 0,
-      stage: ""
+      stage: "",
+      user_Id: 0
     };
   }
 
@@ -49,14 +54,16 @@ export default class TimeLine extends Component {
   }
 
   render() {
-    // console.log("ListProps: ", this.props.data[0].stage);
+    // console.log("datasrc: ", this.props);
     return (
       <View style={[styles.container, this.props.style]}>
         <Text
           style={{
             justifyContent: "center",
             alignItems: "center",
-            fontSize: 20
+            fontSize: 25,
+            marginBottom: 15,
+            marginLeft: 15
           }}
         >
           Stage {this.props.data[0].stage}
@@ -75,9 +82,11 @@ export default class TimeLine extends Component {
 
   _renderRow(rowData, sectionID, rowID) {
     return (
-      <View key={rowID} style={this.props.rowContainerStyle}>
+      <View key={rowID} style={styles.rowContainerStyle}>
         <View style={[styles.rowContainer]}>
-          {this.renderTime(rowData, sectionID, rowID)}
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            {this.renderTime(rowData, sectionID, rowID)}
+          </View>
           {this.renderEvent(rowData, sectionID, rowID)}
           {this.renderCircle(rowData, sectionID, rowID)}
         </View>
@@ -92,7 +101,7 @@ export default class TimeLine extends Component {
     return (
       <View style={{ alignItems: "flex-end" }}>
         <View style={[styles.timeContainer, this.props.timeContainerStyle]}>
-          <Text style={[styles.starttime, this.props.timeStyle]}>
+          <Text style={[styles.time, this.props.timeStyle]}>
             {rowData.starttime}
             {`\n`}~{`\n`}
             {rowData.endtime}
@@ -128,16 +137,11 @@ export default class TimeLine extends Component {
       >
         <TouchableOpacity
           disabled={this.props.onEventPress == null}
-          style={{ backgroundColor: "#ff0000", marginTop: 5 }}
+          style={{ marginTop: 5 }}
         >
           <View style={styles.detail}>
             {this.renderDetail(rowData, sectionID, rowID)}
           </View>
-          {this.props.addButton ? (
-            <Button title="Add" onPress={() => alert("post요청")} />
-          ) : (
-            <Text></Text>
-          )}
           {this._renderSeparator()}
         </TouchableOpacity>
       </View>
@@ -147,20 +151,107 @@ export default class TimeLine extends Component {
   _renderDetail(rowData, sectionID, rowID) {
     const artistName = rowData.artist;
     const description = rowData.description;
-    let artist = (
-      <View>
-        <Text
-          style={[styles.artist, this.props.titleStyle]}
-          onPress={() => alert(description)}
+    const timeGap = this._timeGapCalculator(rowData);
+
+    let concertRow = (
+      <View style={{}}>
+        {timeGap > 40 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 36 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 32 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 28 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 24 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 20 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 16 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 12 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 8 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 4 ? <Text style={styles.gap}></Text> : null}
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
         >
-          {artistName}
-        </Text>
-        {/* <Text style={[styles.description, this.props.descriptionStyle]}>
-          {rowData.description}
-        </Text> */}
+          <Text
+            style={{
+              fontSize: 15,
+              width: 75
+            }}
+            onPress={() => this._showConcertInfos(artistName, description)}
+          >
+            {artistName.length > 5
+              ? artistName.slice(0, 4) + "..."
+              : artistName}
+          </Text>
+          {this.props.addButton ? (
+            <TouchableOpacity
+              onPress={() => {
+                addUserConcert(this.state.user_Id, rowData.concert_Id);
+                alert(
+                  `콘서트가 추가되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
+                );
+              }}
+              style={{
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 15
+                  // opacity: 0.4,
+                  // paddingLeft: 5,
+                  // paddingRight: 5
+                }}
+              >
+                ➕
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <Text></Text>
+          )}
+          {this.props.removeButton ? (
+            <TouchableOpacity
+              onPress={() => {
+                deleteUserConcert(this.state.user_Id, rowData.concert_Id);
+                alert(
+                  `콘서트가 삭제되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
+                );
+              }}
+              style={{
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 15
+                  // opacity: 0.4,
+                  // paddingLeft: 5,
+                  // paddingRight: 5
+                }}
+              >
+                ⛔
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <Text></Text>
+          )}
+        </View>
+        {timeGap > 40 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 36 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 32 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 28 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 24 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 20 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 16 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 12 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 8 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 4 ? <Text style={styles.gap}></Text> : null}
       </View>
     );
-    return <View style={styles.container}>{artist}</View>;
+    return <View style={styles.container}>{concertRow}</View>;
   }
 
   _renderCircle(rowData, sectionID, rowID) {
@@ -196,6 +287,24 @@ export default class TimeLine extends Component {
     }
     return <View style={[styles.separator, this.props.separatorStyle]} />;
   }
+
+  _timeGapCalculator(concertData) {
+    let startHour = (Number(concertData.starttime.slice(0, 2)) / 24) * 100;
+    let startMinute = Number(concertData.starttime.slice(3)) / 60;
+    let endHour = (Number(concertData.endtime.slice(0, 2)) / 24) * 100;
+    let endMinut = Number(concertData.endtime.slice(3)) / 60;
+
+    let startTime = startHour + startMinute;
+    let endTime = endHour + endMinut;
+
+    return Math.abs(endTime - startTime);
+  } //ratio 24h = 100%
+
+  _dynamicLineLength(timeGap) {}
+
+  _showConcertInfos(artistName, description) {
+    alert(`공연 아티스트:${artistName}\n\n설명:${description}`);
+  }
 }
 
 TimeLine.defaultProps = {
@@ -204,7 +313,6 @@ TimeLine.defaultProps = {
   lineWidth: defaultLineWidth,
   lineColor: defaultLineColor,
   innerCircle: defaultInnerCircle,
-  columnFormat: "single-column-left",
   separator: false,
   showTime: true
 };
@@ -214,7 +322,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   listview: {
-    flex: 1
+    // flex: 1
   },
   sectionHeader: {
     marginBottom: 15,
@@ -229,15 +337,17 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: "row",
-    flex: 1,
-    //alignItems: 'stretch',
+    alignItems: "stretch",
     justifyContent: "center"
+    // flex: 1,
   },
+  rowContainerStyle: {},
+
   timeContainer: {
     minWidth: 45
   },
-  starttime: {
-    textAlign: "right",
+  time: {
+    textAlign: "center",
     color: defaultTimeTextColor
   },
   circle: {
@@ -273,5 +383,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#aaa",
     marginTop: 10,
     marginBottom: 10
+  },
+  gap: {
+    fontSize: 10
   }
 });

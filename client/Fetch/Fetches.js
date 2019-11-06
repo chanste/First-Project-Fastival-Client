@@ -37,3 +37,33 @@ export const deleteUserFestival = (user_Id, festival_Id) => {
     body: JSON.stringify(body)
   }).then(res => res.json());
 };
+
+export const addUserConcert = (user_Id, concert_Id) => {
+  let body = [
+    {
+      user_Id: user_Id,
+      concert_Id: concert_Id
+    }
+  ];
+  return fetch(server + "concerts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  }).then(response => response.json());
+};
+
+export const deleteUserConcert = (user_Id, concert_Id) => {
+  let body = {
+    user_Id: user_Id,
+    concert_Id: concert_Id
+  };
+  return fetch(server + "festivals", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  }).then(res => res.json());
+};

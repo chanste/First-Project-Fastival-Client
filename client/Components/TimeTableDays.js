@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import TimeLineRender from "./TimeLineRender";
+import { gray } from "ansi-colors";
 
 // Get Datas [{concert_Id : int, starttime : str, endtime,  stage : str, artist : str, con_day : int, fest_Id : int}, {data2}, {data3}....]
 
@@ -34,25 +35,46 @@ export default class TimeTableDaysRender extends Component {
 
   Item({ item }) {
     return (
-      <Text
-        onPress={() => this.getSelectedDay(item)}
-        style={{ fontSize: 30, flexDirection: "row", flexWrap: "wrap" }}
+      <View
+        style={{
+          borderStyle: "solid",
+          borderWidth: 2,
+          borderRadius: 50,
+          borderColor: "#f1f3f5",
+          width: 50,
+          height: 50,
+          backgroundColor: "#f1f3f5",
+          marginRight: 10,
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: 30,
+          marginTop: 30
+        }}
       >
-        {item}
-      </Text>
+        <Text
+          onPress={() => this.getSelectedDay(item)}
+          style={{
+            textAlign: "center",
+            fontSize: 25,
+            padding: 10
+          }}
+        >
+          {item}
+        </Text>
+      </View>
     );
   }
 
   render() {
     const stages = this.howManyStages();
-    // console.log("TimeTableDays Props : ", this.props);
-    // console.log("this State: ", stages);
+
     return (
-      <View>
+      <View style={{ marginLeft: 25 }}>
         <FlatList
           data={this.props.timeTableStates.days}
           renderItem={this.Item}
           keyExtractor={item => "" + item}
+          numColumns={7}
         />
         <TimeLineRender
           selectedDayData={this.props.timeTableStates.selectedDayData}

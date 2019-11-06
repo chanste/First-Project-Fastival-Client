@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
 import TimeLine from "./TimeLine";
+import { addUserConcert } from "../Fetch/Fetches";
 
 export default class TimeLineRender extends Component {
   constructor(props) {
@@ -18,23 +19,24 @@ export default class TimeLineRender extends Component {
   }
 
   Item({ item }) {
+    // console.log(
+    //   "this.props.selectedDayData[item]: ",
+    //   this.props.selectedDayData[item]
+    // );
     return (
       <TimeLine
         data={this.props.selectedDayData[item]}
         addButton={true}
+        removeButton={false}
         details={this.props.selectedDayData[item].artist}
         style={styles.style}
         // listViewStyle={styles.listViewStyle}
         // rowContainerStyle={styles.rowContainerStyle}
       />
     );
-    // return <Text>{item}</Text>;
   }
 
   render() {
-    // console.log("TimeLineRender : ", this.props);
-    // console.log("this.state.stages: ", this.props.stages);
-    // console.log("TimeLineRender: ", this.state);
     return (
       <FlatList
         data={this.props.stages}
@@ -43,6 +45,7 @@ export default class TimeLineRender extends Component {
         numColumns={2}
       />
     );
+
     {
       /* <Text>
           Test: {this.props.stages[0] ? this.props.stages[0] : "none"}
@@ -56,12 +59,12 @@ const styles = StyleSheet.create({
   style: {
     // justifyContent: "center"
     // alignItems: "center"
+    marginBottom: 300
   },
   //제목을 제외 순수 테이블 스타일
   listViewStyle: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    backgroundColor: "green"
+    flexWrap: "wrap"
   },
   //각 이벤트열
   rowContainerStyle: {

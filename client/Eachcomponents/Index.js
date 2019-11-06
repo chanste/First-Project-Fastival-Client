@@ -15,8 +15,16 @@ import Chatbox from "../Screens/Chatbox";
 //<Button title="Sign out" onPress={() => firebase.auth().signOut()} />
 
 class Index extends Component {
+  constructor(props){
+    super(props)
+  }
   render() {
-    return <IndexNavigator />;
+    return <IndexNavigator 
+    screenProps={{
+      user_Id : this.props.screenProps.user_Id,
+      selectedFestival : this.props.screenProps.selectedFestival
+    }}
+    />;
   }
 }
 

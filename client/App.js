@@ -4,7 +4,6 @@ import { createAppContainer ,createSwitchNavigator } from 'react-navigation'
 
 import LoginScreen from './Eachcomponents/LoginScreen'
 import LoadingScreen from './Eachcomponents/LoadingScreen'
-// import Index from './Eachcomponents/Index'
 import Main from './Screens/Main'
 
 import firebase from 'firebase'

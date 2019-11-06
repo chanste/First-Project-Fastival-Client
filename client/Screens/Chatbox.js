@@ -79,17 +79,17 @@ export default class Chatbox extends React.Component {
           onSend={messages => this.onSend(messages)}
           user={{
             _id: 1,
-            name : 'hyung chan'
+            name: "hyung chan"
           }}
           renderMessage={this.renderMessage}
         />
         {Platform.OS === "android" && (
-          <KeyboardAvoidingView behavior="padding" 
-          keyboardVerticalOffset="30"/>
+          <KeyboardAvoidingView
+            behavior="padding"
+            keyboardVerticalOffset="30"
+          />
         )}
       </View>
     );
   }
 }
-
-

@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  FlatList,
-  Button
-} from "react-native";
+import { Button } from "react-native";
 
 import { deleteUserFestival } from "../Fetch/Fetches";
 
@@ -20,11 +12,10 @@ export default class Remover extends Component {
   rmUserFestival() {
     //this.props.festival_Id를 post요청을 보내 user_ID와 fest_ID관계를 삭제.
     //this.props.festival_Id로 festival_Id를 받음.
-
+    
     deleteUserFestival(this.props.user_Id, this.props.festival_Id);
-
-    console.log("these will be deleted :", this.props);
-
+    this.props.refresh();
+    
     alert("제거되었습니다!");
   }
 

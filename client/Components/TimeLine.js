@@ -5,10 +5,10 @@ import {
   Image,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import { addUserConcert, deleteUserConcert } from "../Fetch/Fetches";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 const ds = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
@@ -42,7 +42,7 @@ export default class TimeLine extends Component {
       x: 0,
       width: 0,
       stage: "",
-      user_Id: 0
+      user_Id: this.props.user_Id
     };
   }
 
@@ -54,19 +54,19 @@ export default class TimeLine extends Component {
   }
 
   render() {
-    // console.log("datasrc: ", this.props);
     return (
       <View style={[styles.container, this.props.style]}>
         <Text
           style={{
             justifyContent: "center",
             alignItems: "center",
-            fontSize: 25,
+            fontSize: 19,
             marginBottom: 15,
-            marginLeft: 15
+            marginLeft: 15,
+            width: 200
           }}
         >
-          Stage {this.props.data[0].stage}
+          {this.props.data[0].stage}
         </Text>
         <ListView
           ref="listView"
@@ -188,21 +188,12 @@ export default class TimeLine extends Component {
             <TouchableOpacity
               onPress={() => {
                 addUserConcert(this.state.user_Id, rowData.concert_Id);
-                alert(
-                  `콘서트가 추가되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
-                );
+                Alert.alert("", "콘서트가 추가되었습니다.");
               }}
-              style={
-                {
-                  // justifyContent: "center",
-                  // alignItems: "center"
-                }
-              }
             >
               <Text
                 style={{
                   fontSize: 10,
-                  // opacity: 0.4,
                   paddingLeft: 5,
                   paddingRight: 5
                 }}
@@ -217,21 +208,12 @@ export default class TimeLine extends Component {
             <TouchableOpacity
               onPress={() => {
                 deleteUserConcert(this.state.user_Id, rowData.concert_Id);
-                alert(
-                  `콘서트가 삭제되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
-                );
+                Alert.alert(`콘서트가 삭제되었습니다.`);
               }}
-              style={
-                {
-                  // justifyContent: "center",
-                  // alignItems: "center"
-                }
-              }
             >
               <Text
                 style={{
                   fontSize: 10,
-                  // opacity: 0.4,
                   paddingLeft: 5,
                   paddingRight: 5
                 }}
@@ -307,7 +289,10 @@ export default class TimeLine extends Component {
   _dynamicLineLength(timeGap) {}
 
   _showConcertInfos(artistName, description) {
-    alert(`공연 아티스트:${artistName}\n\n설명:${description}`);
+    Alert.alert(
+      "공연정보",
+      `공연 아티스트:${artistName}\n\n설명:${description}`
+    );
   }
 }
 

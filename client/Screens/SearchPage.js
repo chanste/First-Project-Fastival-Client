@@ -8,7 +8,7 @@ import {
   Image
 } from "react-native";
 import Adder from "../Eachcomponents/Adder";
-import firebase from 'firebase'
+import firebase from "firebase";
 
 //Get [{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
 
@@ -41,7 +41,7 @@ export default class SearchPage extends Component {
       ...this.state,
       datas: this.props.screenProps.festivals,
       currDatas: this.props.screenProps.festivals,
-      user_Id: this.props.screenProps.user_Id 
+      user_Id: this.props.screenProps.user_Id
     });
     this.textSearching();
   }
@@ -60,14 +60,11 @@ export default class SearchPage extends Component {
 
   textSearching(text) {
     let currDatas = this.props.screenProps.festivals;
-    // console.log("currDatas: ", currDatas);
     let filteredList = currDatas.filter(item => {
-      // console.log("item: ", item);
       if (item.name.search(text) !== -1) {
         return true;
       }
     });
-    // console.log("filteredList: ", filteredList);
     this.setState({
       ...this.state,
       currDatas: filteredList
@@ -76,7 +73,6 @@ export default class SearchPage extends Component {
 
   Item({ item }) {
     const uId = firebase.auth().currentUser.uid;
-    // console.log(item)
     return (
       <View style={{ marginTop: 30 }}>
         <Image
@@ -86,7 +82,7 @@ export default class SearchPage extends Component {
         <Text style={{ fontSize: 20 }} onPress={() => alert("자세한 정보")}>
           {item.name}
         </Text>
-        <Adder festival_Id={item.festival_Id} user_Id={uId}/>
+        <Adder festival_Id={item.festival_Id} user_Id={uId} />
       </View>
     );
   }

@@ -24,7 +24,6 @@ class LoginScreen extends Component {
 
   //로그인할 경우 데이터베이스에 유저데이터 POST 요청
   onSignIn = googleUser => {
-    // console.log("Google Auth Response", googleUser);
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
     var unsubscribe = firebase.auth().onAuthStateChanged(
       function(firebaseUser) {
@@ -41,27 +40,25 @@ class LoginScreen extends Component {
             .auth()
             .signInAndRetrieveDataWithCredential(credential)
             .then(function(result) {
-              // console.log("user signed in ", result);
               let userInfo = {
-                user_Id : result.user.uid,
+                user_Id: result.user.uid,
                 email: result.additionalUserInfo.profile.email,
-                username : result.additionalUserInfo.profile.name,
-                givenname : result.additionalUserInfo.profile.given_name,
-                photourl : result.user.photoURL
-              }
-              console.log("###", userInfo)
-             // if (result.additionalUserInfo.isNewUser) {
-                window
-                  .fetch("http://3.133.96.196:5000/users ", {
-                    method: "POST",
-                    body : JSON.stringify(userInfo),
-                    headers: {
-                      "Content-Type": "application/json"
-                    }
-                  })
-                  .then(response => {
-                    return response.json();
-                  })
+                username: result.additionalUserInfo.profile.name,
+                givenname: result.additionalUserInfo.profile.given_name,
+                photourl: result.user.photoURL
+              };
+              // if (result.additionalUserInfo.isNewUser) {
+              window
+                .fetch("http://3.133.96.196:5000/users ", {
+                  method: "POST",
+                  body: JSON.stringify(userInfo),
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                })
+                .then(response => {
+                  return response.json();
+                });
               //}
             })
             .catch(function(error) {

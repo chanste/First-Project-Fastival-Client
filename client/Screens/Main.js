@@ -6,7 +6,7 @@ import Remover from "../Eachcomponents/Remover";
 
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import firebase from 'firebase'
+import firebase from "firebase";
 import { getAllFestivals, getUserFestivals } from "../Fetch/Fetches";
 import Index from "../Eachcomponents/Index";
 
@@ -18,7 +18,7 @@ class MainScreen extends React.Component {
     this.setUserFestivals = this.setUserFestivals.bind(this);
     this.Item = this.Item.bind(this);
     this.selectFestival = this.selectFestival.bind(this);
-    this.refresh = this.refresh.bind(this)
+    this.refresh = this.refresh.bind(this);
   }
   static navigationOptions = ({ navigation }) => {
     return {
@@ -35,10 +35,10 @@ class MainScreen extends React.Component {
   };
 
   state = {
-    userFestivals: [] 
+    userFestivals: []
   };
 
-  refresh(){
+  refresh() {
     getUserFestivals(this.props.screenProps.user_Id, this.setUserFestivals);
   }
 
@@ -49,20 +49,18 @@ class MainScreen extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
       toSearchPage: this._toSearchPage
-    });   
-    this.focusListener = this.props.navigation.addListener('didFocus', () => {
+    });
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
       getUserFestivals(this.props.screenProps.user_Id, this.setUserFestivals);
     });
   }
 
   //유저 festivalList 정보를 불러오고, state 업데이트
   setUserFestivals(data) {
-    // console.log("data before setstate", data)
     this.setState({
       ...this.state,
       userFestivals: data
     });
-    // console.log("let's see the state after setting", this.state)
   }
   //페스티벌을 골랐을 때 인덱스로 넘어감
   selectFestival(item) {
@@ -83,20 +81,24 @@ class MainScreen extends React.Component {
           />
           <Text
             onPress={() => this.selectFestival(item)}
-            style={{ fontSize: 20, fontWeight: "600"}}
+            style={{ fontSize: 20, fontWeight: "600" }}
           >
             {item.name}
           </Text>
         </View>
-        <Remover festival_Id={item.festival_Id} user_Id={uId} refresh={item.refresh}/>
+        <Remover
+          festival_Id={item.festival_Id}
+          user_Id={uId}
+          refresh={item.refresh}
+        />
       </View>
     );
   }
 
   render() {
     const datas = this.state.userFestivals;
-    for(const item of datas){
-      item.refresh = this.refresh
+    for (const item of datas) {
+      item.refresh = this.refresh;
     }
     return (
       <View>
@@ -111,7 +113,7 @@ class MainScreen extends React.Component {
               <View>
                 <Text
                   style={{ marginTop: 20, fontSize: 30, fontWeight: "700" }}
-                > 
+                >
                   My Festival List
                 </Text>
               </View>
@@ -132,11 +134,10 @@ class MainScreen extends React.Component {
 
 //async스토리지??(리액트 로컬 스토리지)
 
-
 const AppStackNavigator = createStackNavigator(
   {
-    Main: MainScreen, //장바구니 
-    SearchPage: SearchPage 
+    Main: MainScreen, //장바구니
+    SearchPage: SearchPage
   },
   { initialRouteName: "Main" }
 );
@@ -180,7 +181,7 @@ export default class Main extends Component {
       festivals: data
     });
   }
-  
+
   setSelectedFestival(item) {
     this.setState({
       ...this.state,
@@ -196,7 +197,7 @@ export default class Main extends Component {
           festivals: this.state.festivals,
           user_Id: user_Id,
           selectedFestival: this.state.selectedFestival,
-          setSelectedFestival: this.setSelectedFestival,
+          setSelectedFestival: this.setSelectedFestival
         }}
       />
     );

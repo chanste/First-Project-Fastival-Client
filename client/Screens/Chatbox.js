@@ -71,7 +71,6 @@ export default class Chatbox extends React.Component {
     return <SlackMessage {...props} messageTextStyle={messageTextStyle} />;
   }
   render() {
-    // console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <GiftedChat

@@ -67,3 +67,9 @@ export const deleteUserConcert = (user_Id, concert_Id) => {
     body: JSON.stringify(body)
   }).then(res => res.json());
 };
+
+export const getAllConcerts = (festival_Id, callback) => {
+  fetch(server + "concerts/" + festival_Id)
+    .then(res => res.json())
+    .then(data => callback(data));
+};

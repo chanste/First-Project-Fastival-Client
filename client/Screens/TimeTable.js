@@ -136,7 +136,7 @@ export default class TimeTable extends Component {
 
   state = {
     days: [],
-    concertDatas: sortedDatas,
+    concertDatas: sortedDatas, // 데이터는 fetch 해 와야 함. getAllConcerts fetch는 구현 완료, 다만, 상위 컴포넌트에서 내려주는 festival_Id가 필요하므로, 추후 구현
     selectedDayData: {}
   };
 

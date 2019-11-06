@@ -121,8 +121,8 @@ export default class TimeLine extends Component {
       borderColor: lineColor,
       borderLeftWidth: lineWidth,
       borderRightWidth: 0,
-      marginLeft: 20,
-      paddingLeft: 20
+      marginLeft: 10,
+      paddingLeft: 10
     };
 
     return (
@@ -169,19 +169,19 @@ export default class TimeLine extends Component {
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "center",
+            // justifyContent: "center",
             alignItems: "center"
           }}
         >
           <Text
             style={{
               fontSize: 15,
-              width: 75
+              width: 90
             }}
             onPress={() => this._showConcertInfos(artistName, description)}
           >
-            {artistName.length > 5
-              ? artistName.slice(0, 4) + "..."
+            {artistName.length > 6
+              ? artistName.slice(0, 5) + "..."
               : artistName}
           </Text>
           {this.props.addButton ? (
@@ -192,17 +192,19 @@ export default class TimeLine extends Component {
                   `콘서트가 추가되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
                 );
               }}
-              style={{
-                justifyContent: "center",
-                alignItems: "center"
-              }}
+              style={
+                {
+                  // justifyContent: "center",
+                  // alignItems: "center"
+                }
+              }
             >
               <Text
                 style={{
-                  fontSize: 15
+                  fontSize: 10,
                   // opacity: 0.4,
-                  // paddingLeft: 5,
-                  // paddingRight: 5
+                  paddingLeft: 5,
+                  paddingRight: 5
                 }}
               >
                 ➕
@@ -219,17 +221,19 @@ export default class TimeLine extends Component {
                   `콘서트가 삭제되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
                 );
               }}
-              style={{
-                justifyContent: "center",
-                alignItems: "center"
-              }}
+              style={
+                {
+                  // justifyContent: "center",
+                  // alignItems: "center"
+                }
+              }
             >
               <Text
                 style={{
-                  fontSize: 15
+                  fontSize: 10,
                   // opacity: 0.4,
-                  // paddingLeft: 5,
-                  // paddingRight: 5
+                  paddingLeft: 5,
+                  paddingRight: 5
                 }}
               >
                 ⛔

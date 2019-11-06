@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
   style: {
     // justifyContent: "center"
     // alignItems: "center"
-    marginBottom: 300
+    marginBottom: 300,
+    marginRight: 5
   },
   //제목을 제외 순수 테이블 스타일
   listViewStyle: {

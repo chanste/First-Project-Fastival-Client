@@ -69,7 +69,7 @@ export default class TimeTableDaysRender extends Component {
     const stages = this.howManyStages();
 
     return (
-      <View style={{ marginLeft: 25 }}>
+      <View style={{ marginLeft: 15 }}>
         <FlatList
           data={this.props.timeTableStates.days}
           renderItem={this.Item}

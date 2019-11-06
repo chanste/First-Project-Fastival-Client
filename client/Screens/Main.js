@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Button, FlatList, Text, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Button,
+  FlatList,
+  Text,
+  Image,
+  TouchableOpacity
+} from "react-native";
 import SearchPage from "./SearchPage";
 import UserConcert from "./UserConcert";
 import Remover from "../Eachcomponents/Remover";
@@ -23,13 +31,14 @@ class MainScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: (
-        <Button
-          title="Find more Festivals"
+        <Text
           onPress={() => {
             navigation.getParam("toSearchPage")();
           }}
-          style={{}}
-        />
+          style={{ opacity: 0.4, width: 350 }}
+        >
+          Find more Festivals
+        </Text>
       )
     };
   };
@@ -73,22 +82,29 @@ class MainScreen extends React.Component {
   Item({ item }) {
     const uId = firebase.auth().currentUser.uid;
     return (
-      <View style={{ marginTop: 10 }}>
-        <View style={{}}>
-          <Image
-            style={{ width: 60, height: 60, borderRadius: 20 }}
-            source={{ uri: item.img_url }} //일단 map_url로 사용
-          />
-          <Text
-            onPress={() => this.selectFestival(item)}
-            style={{ fontSize: 20, fontWeight: "600" }}
-          >
-            {item.name}
-          </Text>
-        </View>
+      <View
+        style={{ marginTop: 10, flexDirection: "row", alignItems: "center" }}
+      >
+        <Image
+          style={{ width: 60, height: 60, borderRadius: 20 }}
+          source={{ uri: item.img_url }}
+        />
+        <Text
+          onPress={() => this.selectFestival(item)}
+          style={{
+            fontSize: 20,
+            fontWeight: "600",
+            marginRight: 10,
+            marginLeft: 10,
+            opacity: 0.6,
+            width: 250
+          }}
+        >
+          {item.name}
+        </Text>
         <Remover
           festival_Id={item.festival_Id}
-          user_Id={uId}
+          user_Id={firebase.auth().currentUser.uid}
           refresh={item.refresh}
         />
       </View>
@@ -100,33 +116,51 @@ class MainScreen extends React.Component {
     for (const item of datas) {
       item.refresh = this.refresh;
     }
-    return (
-      <View>
-        {this.state.userFestivals.length === 0 ? (
-          <Button
-            title="Add Your Festivals"
-            onPress={() => this._toSearchPage()}
-          />
-        ) : (
-          <View style={{}}>
-            <View style={{}}>
-              <View>
-                <Text
-                  style={{ marginTop: 20, fontSize: 30, fontWeight: "700" }}
-                >
-                  My Festival List
-                </Text>
-              </View>
-              <FlatList
-                data={datas}
-                renderItem={this.Item}
-                keyExtractor={item => {
-                  return "" + item.festival_Id; // this must be string
-                }}
-              />
-            </View>
-          </View>
-        )}
+    return this.state.userFestivals.length === 0 ? (
+      // <Button title="Add Your Festivals" onPress={() => this._toSearchPage()} />
+      <TouchableOpacity
+        onPress={() => this._toSearchPage()}
+        style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
+      >
+        <Text style={{ fontSize: 15, opacity: 0.5 }}>Add Your Festivals</Text>
+      </TouchableOpacity>
+    ) : (
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Text
+          style={{
+            marginTop: 10,
+            marginBottom: 5,
+            fontSize: 25,
+            fontWeight: "700",
+            opacity: 0.6
+          }}
+        >
+          My Festival List
+        </Text>
+        <Text
+          style={{
+            borderTopWidth: 1,
+            borderStyle: "solid",
+            borderColor: "#f1f3f5",
+            width: 2000,
+            fontSize: 1
+          }}
+        >
+          {" "}
+        </Text>
+        <FlatList
+          data={this.state.userFestivals}
+          renderItem={this.Item}
+          keyExtractor={item => {
+            // console.log("keyExtractor: ", item);
+            return "" + item.festival_Id; // this must be string
+          }}
+        />
       </View>
     );
   }

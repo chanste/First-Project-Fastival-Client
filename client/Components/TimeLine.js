@@ -151,20 +151,22 @@ export default class TimeLine extends Component {
   _renderDetail(rowData, sectionID, rowID) {
     const artistName = rowData.artist;
     const description = rowData.description;
+    const startTime = rowData.starttime;
+    const endTime = rowData.endtime;
     const timeGap = this._timeGapCalculator(rowData);
 
     let concertRow = (
       <View style={{}}>
-        {timeGap > 40 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 36 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 32 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 28 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 24 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 20 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 16 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 12 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 8 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 4 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 40 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 36 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 32 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 28 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 24 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 20 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 16 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 12 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 8 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 4 ? <Text style={styles.gap}> </Text> : null}
         <View
           style={{
             display: "flex",
@@ -178,7 +180,14 @@ export default class TimeLine extends Component {
               fontSize: 15,
               width: 90
             }}
-            onPress={() => this._showConcertInfos(artistName, description)}
+            onPress={() =>
+              this._showConcertInfos(
+                artistName,
+                description,
+                startTime,
+                endTime
+              )
+            }
           >
             {artistName.length > 6
               ? artistName.slice(0, 5) + "..."
@@ -225,16 +234,16 @@ export default class TimeLine extends Component {
             <Text></Text>
           )}
         </View>
-        {timeGap > 40 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 36 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 32 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 28 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 24 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 20 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 16 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 12 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 8 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 4 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 40 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 36 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 32 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 28 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 24 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 20 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 16 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 12 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 8 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 4 ? <Text style={styles.gap}> </Text> : null}
       </View>
     );
     return <View style={styles.container}>{concertRow}</View>;
@@ -288,10 +297,10 @@ export default class TimeLine extends Component {
 
   _dynamicLineLength(timeGap) {}
 
-  _showConcertInfos(artistName, description) {
+  _showConcertInfos(artistName, description, starttime, endtime) {
     Alert.alert(
       "공연정보",
-      `공연 아티스트:${artistName}\n\n설명:${description}`
+      `공연 아티스트 : ${artistName}\n\n설명 : ${description}\n\n시작시간 : ${starttime}\n\n종연시간 : ${endtime}`
     );
   }
 }

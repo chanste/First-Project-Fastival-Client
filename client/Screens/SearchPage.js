@@ -74,12 +74,24 @@ export default class SearchPage extends Component {
   Item({ item }) {
     const uId = firebase.auth().currentUser.uid;
     return (
-      <View style={{ marginTop: 30 }}>
+      <View
+        style={{ marginTop: 10, flexDirection: "row", alignItems: "center" }}
+      >
         <Image
-          style={{ width: 100, height: 100, borderRadius: 10 }}
+          style={{ width: 60, height: 60, borderRadius: 20 }}
           source={{ uri: item.img_url }}
         />
-        <Text style={{ fontSize: 20 }} onPress={() => alert("자세한 정보")}>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "600",
+            marginRight: 10,
+            marginLeft: 10,
+            opacity: 0.6,
+            width: 250
+          }}
+          onPress={() => alert("자세한 정보")}
+        >
           {item.name}
         </Text>
         <Adder festival_Id={item.festival_Id} user_Id={uId} />

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import * as Google from "expo-google-app-auth";
 import firebase from "firebase";
 import { Google_Client_API_Key } from "../secret";
+import GoogleLogInButton from "../Components/GoogleLogInButton";
 
 class LoginScreen extends Component {
   //firebase에 있는 유저와 구글을 통해 로그인하려는 유저가 동일한지 확인
@@ -98,10 +99,11 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button
+        {/* <Button
           title="Sign In With Google"
           onPress={() => this.signInWithGoogleAsync()}
-        />
+        /> */}
+        <GoogleLogInButton event={() => this.signInWithGoogleAsync()} />
       </View>
     );
   }

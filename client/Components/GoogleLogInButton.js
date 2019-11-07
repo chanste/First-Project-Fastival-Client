@@ -13,7 +13,7 @@ export default class GoogleLogInButton extends Component {
         style={[Styles.default, Styles.shadow]}
       >
         <Text style={{ fontSize: 18 }}>
-          <Text style={{ opacity: 0.5 }}>Sign with </Text>
+          <Text style={{ opacity: 0.5 }}>Sign in with </Text>
           <Text style={{ color: "#2196f3" }}>G</Text>
           <Text style={{ color: "#ea2c2c" }}>o</Text>
           <Text style={{ color: "#f2d563" }}>o</Text>

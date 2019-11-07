@@ -8,19 +8,27 @@ import UserConcert from "../Screens/UserConcert";
 import Map from "../Screens/Map";
 import Chatbox from "../Screens/Chatbox";
 import TimeTable from "../Screens/TimeTable";
+import Setting from "../Screens/Setting";
 
 //<Button title="Sign out" onPress={() => firebase.auth().signOut()} />
 
 class Index extends Component {
   constructor(props) {
     super(props);
+    this.changeFestival = this.changeFestival.bind(this)
   }
+
+  changeFestival() {
+    this.props.navigation.navigate('FestivalSelect')
+  }
+
   render() {
     return (
       <IndexNavigator
         screenProps={{
           user_Id: this.props.screenProps.user_Id,
-          selectedFestival: this.props.screenProps.selectedFestival
+          selectedFestival: this.props.screenProps.selectedFestival,
+          changeFestival : this.changeFestival
         }}
       />
     );
@@ -67,13 +75,24 @@ const ChatboxStack = createSwitchNavigator(
     })
   }
 );
+const SettingStack = createSwitchNavigator(
+  {
+    Setting
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      title: "환경설정"
+    })
+  }
+);
 
 const TabNavigator = createBottomTabNavigator(
   {
     UserConcert: UserConcertStack,
     TimeTable: TimeTableStack,
     Map: MapStack,
-    Chatbox: ChatboxStack
+    Chatbox: ChatboxStack,
+    Setting: SettingStack
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -89,6 +108,8 @@ const TabNavigator = createBottomTabNavigator(
           icon = "🗺️";
         } else if (routeName === "Chatbox") {
           icon = "💬";
+        } else if (routeName === "Setting") {
+          icon = "⚙️";
         }
         // can use react-native-vector-icons
         // <Icon name={iconName} size={iconSize} color={iconColor} />

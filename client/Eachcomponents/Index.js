@@ -1,51 +1,58 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import firebase from "firebase";
-import {
-  createAppContainer,
-  createSwitchNavigator
-} from "react-navigation";
-import { createStackNavigator } from 'react-navigation-stack'
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 import UserConcert from "../Screens/UserConcert";
-import Timetable from "../Screens/Timetable";
 import Map from "../Screens/Map";
 import Chatbox from "../Screens/Chatbox";
+import TimeTable from "../Screens/TimeTable";
+import Setting from "../Screens/Setting";
 
 //<Button title="Sign out" onPress={() => firebase.auth().signOut()} />
 
 class Index extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
+    this.changeFestival = this.changeFestival.bind(this)
   }
+
+  changeFestival() {
+    this.props.navigation.navigate('FestivalSelect')
+  }
+
   render() {
-    return <IndexNavigator 
-    screenProps={{
-      user_Id : this.props.screenProps.user_Id,
-      selectedFestival : this.props.screenProps.selectedFestival
-    }}
-    />;
+    return (
+      <IndexNavigator
+        screenProps={{
+          user_Id: this.props.screenProps.user_Id,
+          selectedFestival: this.props.screenProps.selectedFestival,
+          changeFestival : this.changeFestival
+        }}
+      />
+    );
   }
 }
 
 const UserConcertStack = createStackNavigator(
   {
-      UserConcert
+    UserConcert
   },
   {
-      defaultNavigationOptions: ({navigation}) => ({
-          title: '내 공연!!!!!!',
-      })
+    defaultNavigationOptions: ({ navigation }) => ({
+      title: "내 공연!!!!!!"
+    })
   }
 );
-const TimetableStack = createStackNavigator(
+const TimeTableStack = createStackNavigator(
   {
-    Timetable
+    TimeTable
   },
   {
-      defaultNavigationOptions: ({navigation}) => ({
-          title: '페스티벌 일정표',
-      })
+    defaultNavigationOptions: ({ navigation }) => ({
+      title: "페스티벌 일정표"
+    })
   }
 );
 const MapStack = createStackNavigator(
@@ -53,9 +60,9 @@ const MapStack = createStackNavigator(
     Map
   },
   {
-      defaultNavigationOptions: ({navigation}) => ({
-          title: '지도',
-      })
+    defaultNavigationOptions: ({ navigation }) => ({
+      title: "지도"
+    })
   }
 );
 const ChatboxStack = createSwitchNavigator(
@@ -63,18 +70,29 @@ const ChatboxStack = createSwitchNavigator(
     Chatbox
   },
   {
-      defaultNavigationOptions: ({navigation}) => ({
-          title : "채팅"
-      })
+    defaultNavigationOptions: ({ navigation }) => ({
+      title: "채팅"
+    })
+  }
+);
+const SettingStack = createSwitchNavigator(
+  {
+    Setting
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      title: "환경설정"
+    })
   }
 );
 
 const TabNavigator = createBottomTabNavigator(
   {
     UserConcert: UserConcertStack,
-    Timetable: TimetableStack,
+    TimeTable: TimeTableStack,
     Map: MapStack,
-    Chatbox: ChatboxStack
+    Chatbox: ChatboxStack,
+    Setting: SettingStack
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -84,12 +102,14 @@ const TabNavigator = createBottomTabNavigator(
 
         if (routeName === "UserConcert") {
           icon = "❤️";
-        } else if (routeName === "Timetable") {
+        } else if (routeName === "TimeTable") {
           icon = "⏱️";
         } else if (routeName === "Map") {
           icon = "🗺️";
         } else if (routeName === "Chatbox") {
           icon = "💬";
+        } else if (routeName === "Setting") {
+          icon = "⚙️";
         }
         // can use react-native-vector-icons
         // <Icon name={iconName} size={iconSize} color={iconColor} />
@@ -103,10 +123,10 @@ const TabNavigator = createBottomTabNavigator(
     lazy: false,
     tabBarOptions: {
       activeTintColor: "#46c3ad",
-      inactiveTintColor: "#888",
+      inactiveTintColor: "#888"
     }
   }
-)
+);
 
 const IndexNavigator = createAppContainer(TabNavigator);
 

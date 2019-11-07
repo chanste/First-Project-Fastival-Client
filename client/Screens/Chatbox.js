@@ -22,23 +22,24 @@ export default class Chatbox extends React.Component {
   };
  
   componentDidMount () {
-    this.socket = io("http://3.133.96.196:5000/msg/" + this.props.screenProps.selectedFestival.festival_Id)
+    this.socket = io("http://3.133.96.196:5000/msg/" + this.props.screenProps.selectedFestival.festival_Id) //이부분
     this.socket.on("chat", msg => {
       this.setState({
         ...this.state,
         mseeages : msg
       })
     })
-    //1. socket.io를 통해 서버와 연결
-    //2. 서버에서 message를 가져와서 render
+    //서버측에서 구현되어야 할 부분
+    //1. 처음 connect될때 roomname에 맞게 분류, 동시에 roomname에 해당하는 모든 채팅 내역 클라이언트로 emit
+    //2. 그 이후로 서버한테 chat 이벤트명으로 on받을 때마다 기존 채팅 내역에 업데이트 하고 갱신된 채팅 내역 emit
   }
 
-  //서버랑 연동해서 메세지를 받아오고 그걸로 state 초기화
+  
   onSend(messages = []) {
+    this.socket.emit("chat", messages)
     // this.setState(previousState => ({
     //   messages: GiftedChat.append(previousState.messages, messages)
     // }));
-    this.socket.emit("chat", messages)
   }
 
   renderMessage(props) {
@@ -58,6 +59,7 @@ export default class Chatbox extends React.Component {
   }
 
   render() {
+    
     const userId = firebase.auth().currentUser.uid;
     const userName = firebase.auth().currentUser.name;
     const photoUrl = firebase.auth().currentUser.photoUrl;

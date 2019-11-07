@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button
-} from "react-native";
+import { TouchableOpacity, StyleSheet, Text, Alert } from "react-native";
 import { addUserFestival } from "../Fetch/Fetches";
 
 export default class Adder extends Component {
@@ -13,16 +11,26 @@ export default class Adder extends Component {
   addUserFestival() {
     //this.props.festival_Id를 post요청을 보내 user_ID와 fest_ID매칭
     addUserFestival(this.props.user_Id, this.props.festival_Id);
-    alert("추가되었습니다!");
+    Alert.alert("", "추가되었습니다!");
   }
 
   render() {
     return (
-      <Button
-        title="내 목록에 추가"
-        style={{ width: 140 }}
-        onPress={this.addUserFestival}
-      />
+      <TouchableOpacity style={Styles.button} onPress={this.addUserFestival}>
+        <Text style={Styles.text}>추가</Text>
+      </TouchableOpacity>
     );
   }
 }
+
+const Styles = StyleSheet.create({
+  button: {
+    backgroundColor: "#eaeaea",
+    borderRadius: 5
+  },
+  text: {
+    fontSize: 15,
+    opacity: 0.7,
+    padding: 5
+  }
+});

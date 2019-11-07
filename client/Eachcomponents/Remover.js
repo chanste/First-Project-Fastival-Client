@@ -26,11 +26,6 @@ export default class Remover extends Component {
 
   render() {
     return (
-      // <Button
-      //   title="목록에서 제거"
-      //   style={{ width: 140 }}
-      //   onPress={this.rmUserFestival}
-      // />
       <TouchableOpacity style={Styles.button} onPress={this.rmUserFestival}>
         <Text style={Styles.text}>제거</Text>
       </TouchableOpacity>
@@ -40,11 +35,11 @@ export default class Remover extends Component {
 
 const Styles = StyleSheet.create({
   button: {
-    backgroundColor: "#eaeaea",
+    backgroundColor: "#f1f3f5",
     borderRadius: 5
   },
   text: {
-    fontSize: 15,
+    fontSize: 10,
     opacity: 0.7,
     padding: 5
   }

@@ -83,7 +83,15 @@ class MainScreen extends React.Component {
     const uId = firebase.auth().currentUser.uid;
     return (
       <View
-        style={{ marginTop: 10, flexDirection: "row", alignItems: "center" }}
+        style={{
+          marginTop: 10,
+          flexDirection: "row",
+          alignItems: "center",
+          borderColor: "#f1f3f5",
+          borderStyle: "solid",
+          borderBottomWidth: 1,
+          paddingBottom: 10
+        }}
       >
         <Image
           style={{ width: 60, height: 60, borderRadius: 20 }}
@@ -97,7 +105,7 @@ class MainScreen extends React.Component {
             marginRight: 10,
             marginLeft: 10,
             opacity: 0.6,
-            width: 250
+            width: 280
           }}
         >
           {item.name}
@@ -146,7 +154,7 @@ class MainScreen extends React.Component {
           style={{
             borderTopWidth: 1,
             borderStyle: "solid",
-            borderColor: "#f1f3f5",
+            borderColor: "#e2e2e2",
             width: 2000,
             fontSize: 1
           }}

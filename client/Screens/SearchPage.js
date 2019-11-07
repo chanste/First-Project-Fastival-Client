@@ -75,7 +75,15 @@ export default class SearchPage extends Component {
     const uId = firebase.auth().currentUser.uid;
     return (
       <View
-        style={{ marginTop: 10, flexDirection: "row", alignItems: "center" }}
+        style={{
+          marginTop: 10,
+          flexDirection: "row",
+          alignItems: "center",
+          borderColor: "#f1f3f5",
+          borderStyle: "solid",
+          borderBottomWidth: 1,
+          paddingBottom: 10
+        }}
       >
         <Image
           style={{ width: 60, height: 60, borderRadius: 20 }}

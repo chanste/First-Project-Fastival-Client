@@ -28,12 +28,13 @@ export default class GoogleLogInButton extends Component {
 
 const Styles = StyleSheet.create({
   shadow: {
-    elevation: 1
+    elevation: 2
   },
   default: {
-    width: 200,
-    height: 30,
+    width: 220,
+    height: 35,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    borderWidth: 0
   }
 });

@@ -60,10 +60,9 @@ export default class TimeLine extends Component {
           style={{
             justifyContent: "center",
             alignItems: "center",
-            fontSize: 19,
-            marginBottom: 15,
-            marginLeft: 15,
-            width: 200
+            fontSize: 18,
+            marginBottom: 5,
+            height: 50
           }}
         >
           {this.props.data[0].stage}

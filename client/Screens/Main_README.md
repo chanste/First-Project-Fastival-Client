@@ -9,3 +9,5 @@ expo install react-navigation react-native-gesture-handler react-native-reanimat
 yarn add react-navigation-stack
 
 yarn add react-native-elements ( "react-native-elements": "^1.2.7",)
+
+yarn add firebase

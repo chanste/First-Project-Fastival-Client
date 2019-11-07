@@ -53,7 +53,7 @@ export default class SearchPage extends Component {
         <TextInput
           placeholder="Find more Festivals"
           onChangeText={navigation.getParam("updateSearch")}
-          style={{ width: 350, height: 30 }}
+          style={{ width: 328, height: 30 }}
         />
       )
     };

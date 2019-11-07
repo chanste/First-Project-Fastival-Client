@@ -73,3 +73,9 @@ export const getAllConcerts = (festival_Id, callback) => {
     .then(res => res.json())
     .then(data => callback(data));
 };
+
+export const getUserConcerts = (user_Id, festival_Id, callback) => {
+  fetch(server + "/concerts_user/" + user_Id + "/" + festival_Id)
+    .then(res => res.json())
+    .then(data => callback(data));
+};

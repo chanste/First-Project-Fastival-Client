@@ -17,6 +17,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import firebase from "firebase";
 import { getAllFestivals, getUserFestivals } from "../Fetch/Fetches";
 import Index from "../Eachcomponents/Index";
+import { Icon } from "react-native-elements";
 
 //Get=[{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
 class MainScreen extends React.Component {
@@ -31,14 +32,21 @@ class MainScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: (
-        <Text
+        <TouchableOpacity
           onPress={() => {
             navigation.getParam("toSearchPage")();
           }}
-          style={{ opacity: 0.4, width: 350 }}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: 350,
+            opacity: 0.3,
+            alignItems: "center"
+          }}
         >
-          Find more Festivals
-        </Text>
+          <Icon name="search" type="font-awesome" size={15} />
+          <Text style={{ marginLeft: 10 }}>Find more Festivals</Text>
+        </TouchableOpacity>
       )
     };
   };

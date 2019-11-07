@@ -100,7 +100,7 @@ export default class TimeTable extends Component {
     // console.log("user_Id: ", firebase.auth().currentUser.uid);
 
     return (
-      <View style={{ marginTop: 10 }}>
+      <View style={{}}>
         <TimeTableDays
           timeTableStates={this.state}
           setSelectedDayData={this.setSelectedDayData}

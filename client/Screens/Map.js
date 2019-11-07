@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Button, Image } from "react-native";
-import firebase from 'firebase'
+import firebase from "firebase";
 
 class Map extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
-
   render() {
-    console.log(this.props.screenProps)
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Image
-        style={{ width: 400, height: 400, borderRadius: 20 }}
-        source={{ uri : this.props.screenProps.selectedFestival.map_url}}
+          style={{ width: 400, height: 400, borderRadius: 20 }}
+          source={{ uri: this.props.screenProps.selectedFestival.map_url }}
         />
         <Button title="Sign out" onPress={() => firebase.auth().signOut()} />
       </View>

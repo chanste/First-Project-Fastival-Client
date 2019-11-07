@@ -5,10 +5,10 @@ import {
   Image,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import { addUserConcert, deleteUserConcert } from "../Fetch/Fetches";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 const ds = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
@@ -42,7 +42,7 @@ export default class TimeLine extends Component {
       x: 0,
       width: 0,
       stage: "",
-      user_Id: 0
+      user_Id: this.props.user_Id
     };
   }
 
@@ -54,19 +54,19 @@ export default class TimeLine extends Component {
   }
 
   render() {
-    // console.log("datasrc: ", this.props);
     return (
       <View style={[styles.container, this.props.style]}>
         <Text
           style={{
             justifyContent: "center",
             alignItems: "center",
-            fontSize: 25,
+            fontSize: 19,
             marginBottom: 15,
-            marginLeft: 15
+            marginLeft: 15,
+            width: 200
           }}
         >
-          Stage {this.props.data[0].stage}
+          {this.props.data[0].stage}
         </Text>
         <ListView
           ref="listView"
@@ -151,20 +151,22 @@ export default class TimeLine extends Component {
   _renderDetail(rowData, sectionID, rowID) {
     const artistName = rowData.artist;
     const description = rowData.description;
+    const startTime = rowData.starttime;
+    const endTime = rowData.endtime;
     const timeGap = this._timeGapCalculator(rowData);
 
     let concertRow = (
       <View style={{}}>
-        {timeGap > 40 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 36 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 32 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 28 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 24 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 20 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 16 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 12 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 8 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 4 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 40 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 36 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 32 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 28 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 24 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 20 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 16 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 12 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 8 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 4 ? <Text style={styles.gap}> </Text> : null}
         <View
           style={{
             display: "flex",
@@ -178,7 +180,14 @@ export default class TimeLine extends Component {
               fontSize: 15,
               width: 90
             }}
-            onPress={() => this._showConcertInfos(artistName, description)}
+            onPress={() =>
+              this._showConcertInfos(
+                artistName,
+                description,
+                startTime,
+                endTime
+              )
+            }
           >
             {artistName.length > 6
               ? artistName.slice(0, 5) + "..."
@@ -188,21 +197,12 @@ export default class TimeLine extends Component {
             <TouchableOpacity
               onPress={() => {
                 addUserConcert(this.state.user_Id, rowData.concert_Id);
-                alert(
-                  `콘서트가 추가되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
-                );
+                Alert.alert("", "콘서트가 추가되었습니다.");
               }}
-              style={
-                {
-                  // justifyContent: "center",
-                  // alignItems: "center"
-                }
-              }
             >
               <Text
                 style={{
                   fontSize: 10,
-                  // opacity: 0.4,
                   paddingLeft: 5,
                   paddingRight: 5
                 }}
@@ -217,21 +217,12 @@ export default class TimeLine extends Component {
             <TouchableOpacity
               onPress={() => {
                 deleteUserConcert(this.state.user_Id, rowData.concert_Id);
-                alert(
-                  `콘서트가 삭제되었습니다. user_Id: ${this.state.user_Id} concert_Id: ${rowData.concert_Id}`
-                );
+                Alert.alert(`콘서트가 삭제되었습니다.`);
               }}
-              style={
-                {
-                  // justifyContent: "center",
-                  // alignItems: "center"
-                }
-              }
             >
               <Text
                 style={{
                   fontSize: 10,
-                  // opacity: 0.4,
                   paddingLeft: 5,
                   paddingRight: 5
                 }}
@@ -243,16 +234,16 @@ export default class TimeLine extends Component {
             <Text></Text>
           )}
         </View>
-        {timeGap > 40 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 36 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 32 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 28 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 24 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 20 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 16 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 12 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 8 ? <Text style={styles.gap}></Text> : null}
-        {timeGap > 4 ? <Text style={styles.gap}></Text> : null}
+        {timeGap > 40 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 36 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 32 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 28 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 24 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 20 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 16 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 12 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 8 ? <Text style={styles.gap}> </Text> : null}
+        {timeGap > 4 ? <Text style={styles.gap}> </Text> : null}
       </View>
     );
     return <View style={styles.container}>{concertRow}</View>;
@@ -306,8 +297,11 @@ export default class TimeLine extends Component {
 
   _dynamicLineLength(timeGap) {}
 
-  _showConcertInfos(artistName, description) {
-    alert(`공연 아티스트:${artistName}\n\n설명:${description}`);
+  _showConcertInfos(artistName, description, starttime, endtime) {
+    Alert.alert(
+      "공연정보",
+      `공연 아티스트 : ${artistName}\n\n설명 : ${description}\n\n시작시간 : ${starttime}\n\n종연시간 : ${endtime}`
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import TimeLineRender from "./TimeLineRender";
 import { gray } from "ansi-colors";
 
@@ -20,7 +20,7 @@ export default class TimeTableDaysRender extends Component {
   getSelectedDay(day) {
     this.props.setSelectedDayData(day);
 
-    alert("" + day + "일을 선택하셨습니다.");
+    Alert.alert("", "" + day + "일을 선택하셨습니다.");
   }
 
   howManyStages() {
@@ -55,7 +55,7 @@ export default class TimeTableDaysRender extends Component {
           onPress={() => this.getSelectedDay(item)}
           style={{
             textAlign: "center",
-            fontSize: 25,
+            fontSize: 20,
             padding: 10
           }}
         >

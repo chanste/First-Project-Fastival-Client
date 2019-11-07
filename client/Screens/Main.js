@@ -194,8 +194,8 @@ export default class Main extends Component {
       <AppContainer
         screenProps={{
           festivals: this.state.festivals,
-          user_Id: user_Id,
-          selectedFestival: this.state.selectedFestival,
+            user_Id: user_Id,
+            selectedFestival: this.state.selectedFestival,
           setSelectedFestival: this.setSelectedFestival,
         }}
       />

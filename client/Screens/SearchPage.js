@@ -5,7 +5,8 @@ import {
   View,
   TextInput,
   FlatList,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import Adder from "../Eachcomponents/Adder";
 import firebase from "firebase";
@@ -86,19 +87,19 @@ export default class SearchPage extends Component {
         }}
       >
         <Image
-          style={{ width: 60, height: 60, borderRadius: 20 }}
+          style={{ width: 40, height: 40, borderRadius: 20 }}
           source={{ uri: item.img_url }}
         />
         <Text
           style={{
-            fontSize: 20,
+            fontSize: 15,
             fontWeight: "600",
             marginRight: 10,
             marginLeft: 10,
             opacity: 0.6,
-            width: 250
+            width: 300
           }}
-          onPress={() => alert("자세한 정보")}
+          onPress={() => Alert.alert("자세한 정보", "null")}
         >
           {item.name}
         </Text>

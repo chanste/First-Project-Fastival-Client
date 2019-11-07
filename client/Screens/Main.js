@@ -94,18 +94,18 @@ class MainScreen extends React.Component {
         }}
       >
         <Image
-          style={{ width: 60, height: 60, borderRadius: 20 }}
+          style={{ width: 40, height: 40, borderRadius: 20 }}
           source={{ uri: item.img_url }}
         />
         <Text
           onPress={() => this.selectFestival(item)}
           style={{
-            fontSize: 20,
+            fontSize: 15,
             fontWeight: "600",
             marginRight: 10,
             marginLeft: 10,
             opacity: 0.6,
-            width: 280
+            width: 300
           }}
         >
           {item.name}
@@ -142,10 +142,10 @@ class MainScreen extends React.Component {
         <Text
           style={{
             marginTop: 10,
-            marginBottom: 5,
-            fontSize: 25,
+            marginBottom: 10,
+            fontSize: 20,
             fontWeight: "700",
-            opacity: 0.6
+            opacity: 0.3
           }}
         >
           My Festival List

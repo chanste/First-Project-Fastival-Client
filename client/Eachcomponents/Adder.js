@@ -25,11 +25,11 @@ export default class Adder extends Component {
 
 const Styles = StyleSheet.create({
   button: {
-    backgroundColor: "#eaeaea",
+    backgroundColor: "#f1f3f5",
     borderRadius: 5
   },
   text: {
-    fontSize: 15,
+    fontSize: 10,
     opacity: 0.7,
     padding: 5
   }

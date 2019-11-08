@@ -16,7 +16,7 @@ export const addUserFestival = (user_Id, festival_Id) => {
     },
     body: JSON.stringify(body)
   }).then(response => response.json());
-}; //문제 있음
+};
 
 export const getUserFestivals = (user_Id, callback) => {
   fetch(server + "festivals/" + user_Id)
@@ -70,6 +70,12 @@ export const deleteUserConcert = (user_Id, concert_Id) => {
 
 export const getAllConcerts = (festival_Id, callback) => {
   fetch(server + "concerts/" + festival_Id)
+    .then(res => res.json())
+    .then(data => callback(data));
+};
+
+export const getUserConcerts = (user_Id, festival_Id, callback) => {
+  fetch(server + "/concerts_user/" + user_Id + "/" + festival_Id)
     .then(res => res.json())
     .then(data => callback(data));
 };

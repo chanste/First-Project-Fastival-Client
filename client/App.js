@@ -19,7 +19,7 @@ export default class App extends Component {
 const AppSwitchNavigator = createSwitchNavigator({
   LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,
-  Main: Main // 메인
+  Main: Main 
 });
 
 const AppNavigator = createAppContainer(AppSwitchNavigator);

@@ -17,6 +17,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import firebase from "firebase";
 import { getAllFestivals, getUserFestivals } from "../Fetch/Fetches";
 import Index from "../Eachcomponents/Index";
+import { Icon } from "react-native-elements";
 
 //Get=[{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
 class MainScreen extends React.Component {
@@ -30,18 +31,22 @@ class MainScreen extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      headerLeft: <Text
-      style = {{marginLeft : 25}}
-      >🔎</Text>,
       headerRight: (
-        <Text
+        <TouchableOpacity
           onPress={() => {
             navigation.getParam("toSearchPage")();
           }}
-          style={{ opacity: 0.4, width: 350 }}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: 350,
+            opacity: 0.3,
+            alignItems: "center"
+          }}
         >
-          여기를 눌러 가고 싶은 페스티벌을 찾아보세요!
-        </Text>
+          <Icon name="search" type="font-awesome" size={15} />
+          <Text style={{ marginLeft: 10 }}>Find more Festivals</Text>
+        </TouchableOpacity>
       )
     };
   };
@@ -124,16 +129,17 @@ class MainScreen extends React.Component {
 
   render() {
     const datas = this.state.userFestivals;
-    for (const item of datas) {
+    for (const item in datas) {
       item.refresh = this.refresh;
     }
     return this.state.userFestivals.length === 0 ? (
-      // <Button title="Add Your Festivals" onPress={() => this._toSearchPage()} />
       <TouchableOpacity
         onPress={() => this._toSearchPage()}
         style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
       >
-        <Text style={{ fontSize: 15, opacity: 0.5 }}>Add Your Festivals</Text>
+        <Text style={{ fontSize: 15, opacity: 0.5 }}>
+          여기를 눌러 원하는 페스티벌을 추가하세요!
+        </Text>
       </TouchableOpacity>
     ) : (
       <View
@@ -168,7 +174,6 @@ class MainScreen extends React.Component {
           data={this.state.userFestivals}
           renderItem={this.Item}
           keyExtractor={item => {
-            // console.log("keyExtractor: ", item);
             return "" + item.festival_Id; // this must be string
           }}
         />
@@ -177,11 +182,9 @@ class MainScreen extends React.Component {
   }
 }
 
-//async스토리지??(리액트 로컬 스토리지)
-
 const AppStackNavigator = createStackNavigator(
   {
-    Main: MainScreen, //장바구니
+    Main: MainScreen,
     SearchPage: SearchPage
   },
   { initialRouteName: "Main" }
@@ -200,7 +203,7 @@ const AppContainer = createAppContainer(
     { initialRouteName: "FestivalSelect" }
   )
 );
-// ------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
 
 export default class Main extends Component {
   constructor(props) {
@@ -226,7 +229,7 @@ export default class Main extends Component {
       festivals: data
     });
   }
-
+  //하나의 페스티벌을 고를 경우
   setSelectedFestival(item) {
     this.setState({
       ...this.state,

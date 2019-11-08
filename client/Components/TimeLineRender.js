@@ -15,8 +15,8 @@ export default class TimeLineRender extends Component {
     return (
       <TimeLine
         data={this.props.selectedDayData[item]}
-        addButton={true}
-        removeButton={false}
+        addButton={this.props.add}
+        removeButton={this.props.remove}
         details={this.props.selectedDayData[item].artist}
         style={styles.style}
         user_Id={firebase.auth().currentUser.uid}

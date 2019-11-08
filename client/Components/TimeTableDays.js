@@ -86,6 +86,8 @@ export default class TimeTableDays extends Component {
         <TimeLineRender
           selectedDayData={this.props.timeTableStates.selectedDayData}
           stages={stages}
+          add={this.props.add}
+          remove={this.props.remove}
         />
       </View>
     );

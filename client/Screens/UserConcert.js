@@ -98,6 +98,8 @@ export default class UserConcert extends React.Component {
           timeTableStates={this.state}
           setSelectedDayData={this.setSelectedDayData}
           daysLength={daysLength}
+          add={false}
+          remove={true}
         />
       </View>
     );

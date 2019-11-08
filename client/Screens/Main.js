@@ -30,6 +30,9 @@ class MainScreen extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
+      headerLeft: <Text
+      style = {{marginLeft : 25}}
+      >🔎</Text>,
       headerRight: (
         <Text
           onPress={() => {
@@ -37,7 +40,7 @@ class MainScreen extends React.Component {
           }}
           style={{ opacity: 0.4, width: 350 }}
         >
-          Find more Festivals
+          여기를 눌러 가고 싶은 페스티벌을 찾아보세요!
         </Text>
       )
     };
@@ -145,7 +148,7 @@ class MainScreen extends React.Component {
             marginBottom: 10,
             fontSize: 20,
             fontWeight: "700",
-            opacity: 0.3
+            opacity: 0.1 
           }}
         >
           My Festival List

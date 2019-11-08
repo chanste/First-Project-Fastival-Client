@@ -17,7 +17,7 @@ export default class Adder extends Component {
   render() {
     return (
       <TouchableOpacity style={Styles.button} onPress={this.addUserFestival}>
-        <Text style={Styles.text}>추가</Text>
+        <Text style={Styles.text}>➕</Text>
       </TouchableOpacity>
     );
   }

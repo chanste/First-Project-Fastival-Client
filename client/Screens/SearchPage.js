@@ -51,7 +51,7 @@ export default class SearchPage extends Component {
     return {
       headerRight: () => (
         <TextInput
-          placeholder="Find more Festivals"
+          placeholder="검색어를 입력하세요"
           onChangeText={navigation.getParam("updateSearch")}
           style={{ width: 350, height: 30 }}
         />

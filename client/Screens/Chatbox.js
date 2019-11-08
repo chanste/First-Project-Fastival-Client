@@ -22,8 +22,10 @@ export default class Chatbox extends React.Component {
   };
  
   componentDidMount () {
-    this.socket = io("http://3.133.96.196:5000/msg/" + this.props.screenProps.selectedFestival.festival_Id) //이부분
-    this.socket.on("chat", msg => {
+    this.socket = io.connect("http://3.133.96.196:5000/msg/1")
+    // this.socket = io(`/${this.props.screenProps.selectedFestival.festival_Id}`)
+    this.socket.on('chat', msg => {
+      console.log('hahahahahahahahahahahah!!!!!!', msg)
       this.setState({
         ...this.state,
         mseeages : msg
@@ -36,12 +38,13 @@ export default class Chatbox extends React.Component {
 
   
   onSend(messages = []) {
-    this.socket.emit("chat", messages)
+    this.socket.emit('chat', messages[0])
+    console.log("I sent!", messages[0])
     // this.setState(previousState => ({
     //   messages: GiftedChat.append(previousState.messages, messages)
     // }));
   }
-
+  
   renderMessage(props) {
     const {
       currentMessage: { text: currText }
@@ -60,9 +63,9 @@ export default class Chatbox extends React.Component {
 
   render() {
     
-    const userId = firebase.auth().currentUser.uid;
-    const userName = firebase.auth().currentUser.name;
-    const photoUrl = firebase.auth().currentUser.photoUrl;
+    const userId = firebase.auth().currentUser.uid
+    const userName = firebase.auth().currentUser.displayName;
+    const photoUrl = firebase.auth().currentUser.photoURL;
 
     return (
       <View style={{ flex: 1 }}>

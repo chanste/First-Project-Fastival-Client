@@ -27,7 +27,7 @@ export default class Remover extends Component {
   render() {
     return (
       <TouchableOpacity style={Styles.button} onPress={this.rmUserFestival}>
-        <Text style={Styles.text}>제거</Text>
+        <Text style={Styles.text}>➖</Text>
       </TouchableOpacity>
     );
   }

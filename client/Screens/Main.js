@@ -129,9 +129,13 @@ class MainScreen extends React.Component {
 
   render() {
     const datas = this.state.userFestivals;
-    for (const item in datas) {
-      item.refresh = this.refresh;
+    // for (const item of datas) {
+    //   item.refresh = this.refresh;  
+    // }
+    for (let i=0; i<datas.length; i++){
+      datas[i].refresh = this.refresh;
     }
+
     return this.state.userFestivals.length === 0 ? (
       <TouchableOpacity
         onPress={() => this._toSearchPage()}
@@ -171,7 +175,7 @@ class MainScreen extends React.Component {
           {" "}
         </Text>
         <FlatList
-          data={this.state.userFestivals}
+          data={datas}
           renderItem={this.Item}
           keyExtractor={item => {
             return "" + item.festival_Id; // this must be string

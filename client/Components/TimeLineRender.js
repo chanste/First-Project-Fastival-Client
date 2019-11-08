@@ -31,6 +31,7 @@ export default class TimeLineRender extends Component {
         renderItem={this.Item}
         keyExtractor={item => "" + item}
         numColumns={2}
+        style={{ marginBottom: 300 }}
       />
     );
   }
@@ -39,7 +40,7 @@ export default class TimeLineRender extends Component {
 const styles = StyleSheet.create({
   //style = 제목을 포함한 각 테이블단위
   style: {
-    marginBottom: 150,
+    marginBottom: 70,
     marginRight: 5
   },
   //제목을 제외 순수 테이블 스타일

@@ -5,7 +5,7 @@ import { gray } from "ansi-colors";
 
 // Get Datas [{concert_Id : int, starttime : str, endtime,  stage : str, artist : str, con_day : int, fest_Id : int}, {data2}, {data3}....]
 
-export default class TimeTableDaysRender extends Component {
+export default class TimeTableDays extends Component {
   constructor(props) {
     super(props);
     this.Item = this.Item.bind(this);
@@ -70,12 +70,19 @@ export default class TimeTableDaysRender extends Component {
 
     return (
       <View style={{ marginLeft: 15 }}>
-        <FlatList
-          data={this.props.timeTableStates.days}
-          renderItem={this.Item}
-          keyExtractor={item => "" + item}
-          numColumns={7}
-        />
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <FlatList
+            data={this.props.timeTableStates.days}
+            renderItem={this.Item}
+            keyExtractor={item => "" + item}
+            numColumns={7}
+          />
+        </View>
         <TimeLineRender
           selectedDayData={this.props.timeTableStates.selectedDayData}
           stages={stages}

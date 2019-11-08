@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default class GoogleLogInButton extends Component {
   constructor(props) {
@@ -8,32 +8,41 @@ export default class GoogleLogInButton extends Component {
 
   render() {
     return (
-      <TouchableOpacity
-        onPress={this.props.event}
-        style={[Styles.default, Styles.shadow]}
-      >
-        <Text style={{ fontSize: 18 }}>
-          <Text style={{ opacity: 0.5 }}>Sign in with </Text>
-          <Text style={{ color: "#2196f3" }}>G</Text>
-          <Text style={{ color: "#ea2c2c" }}>o</Text>
-          <Text style={{ color: "#f2d563" }}>o</Text>
-          <Text style={{ color: "#2196f3" }}>g</Text>
-          <Text style={{ color: "#43b52d" }}>l</Text>
-          <Text style={{ color: "#ea2c2c" }}>e</Text>
-        </Text>
-      </TouchableOpacity>
+      <View style={{ alignItems: "center" }}>
+        <Text style={Styles.logo}>FESTIVAL</Text>
+
+        <TouchableOpacity onPress={this.props.event} style={Styles.default}>
+          <View style={Styles.button}>
+            <Text style={{ opacity: 0.5 }}>Sign in with </Text>
+            <Text style={{ color: "#2196f3" }}>G</Text>
+            <Text style={{ color: "#ea2c2c" }}>o</Text>
+            <Text style={{ color: "#f2d563" }}>o</Text>
+            <Text style={{ color: "#2196f3" }}>g</Text>
+            <Text style={{ color: "#43b52d" }}>l</Text>
+            <Text style={{ color: "#ea2c2c" }}>e</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
 
 const Styles = StyleSheet.create({
-  shadow: {
-    elevation: 1
+  button: {
+    fontSize: 18,
+    width: 220,
+    height: 38,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
   },
   default: {
-    width: 200,
-    height: 30,
     justifyContent: "center",
     alignItems: "center"
+  },
+  logo: {
+    fontSize: 60,
+    opacity: 0.2,
+    marginBottom: 200
   }
 });

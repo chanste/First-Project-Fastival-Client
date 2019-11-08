@@ -39,12 +39,11 @@ export const deleteUserFestival = (user_Id, festival_Id) => {
 };
 
 export const addUserConcert = (user_Id, concert_Id) => {
-  let body = [
+  let body =
     {
       user_Id: user_Id,
       concert_Id: concert_Id
-    }
-  ];
+    };
   return fetch(server + "concerts", {
     method: "POST",
     headers: {
@@ -59,7 +58,7 @@ export const deleteUserConcert = (user_Id, concert_Id) => {
     user_Id: user_Id,
     concert_Id: concert_Id
   };
-  return fetch(server + "festivals", {
+  return fetch(server + "concerts", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"
@@ -75,7 +74,7 @@ export const getAllConcerts = (festival_Id, callback) => {
 };
 
 export const getUserConcerts = (user_Id, festival_Id, callback) => {
-  fetch(server + "/concerts_user/" + user_Id + "/" + festival_Id)
+  fetch(server + "concerts_user/" + user_Id + "/" + festival_Id)
     .then(res => res.json())
     .then(data => callback(data));
 };

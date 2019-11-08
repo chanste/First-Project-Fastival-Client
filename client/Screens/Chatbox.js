@@ -33,39 +33,15 @@ export default class Chatbox extends React.Component {
         delete eachItem.id
         newMsg.unshift(eachItem)
       }
-      console.log("#########", newMsg)
       this.setState({
         ...this.state,
         messages : newMsg
       })
-      console.log("@@@@@@@@@@", this.state) 
     })
     //서버측에서 구현되어야 할 부분
     //1. 처음 connect될때 roomname에 맞게 분류, 동시에 roomname에 해당하는 모든 채팅 내역 클라이언트로 emit
     //2. 그 이후로 서버한테 chat 이벤트명으로 on받을 때마다 기존 채팅 내역에 업데이트 하고 갱신된 채팅 내역 emit
   }   
-
-  // I sent! Object {
-  //   "_id": "9f51b617-a593-4dba-9cfb-24fad199cdc2",
-  //   "createdAt": 2019-11-08T08:25:56.833Z,
-  //   "text": "?!?!",
-  //   "user": Object {
-  //     "_id": "BS860jF3lLU21x4bJ6QWbfzTppG3",
-  //     "avatar": "https://lh4.googleusercontent.com/-QtcmeHny-8A/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rc2m9HPxsYf7yuPm_tE60G8uyKOwA/s96-c/photo.jpg",
-  //     "name": "st ch",
-  //   },
-  // }
-
-  // {
-  //   "_id": "63c29299-5045-4673-adc5-fe93de1650e8",
-  //   "createdAt": 2019-11-08T05:49:27.582Z,
-  //   "text": "Mm",
-  //   "user": Object {
-  //     "_id": "BS860jF3lLU21x4bJ6QWbfzTppG3",
-  //     "avatar": "https://lh4.googleusercontent.com/-QtcmeHny-8A/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rc2m9HPxsYf7yuPm_tE60G8uyKOwA/s96-c/photo.jpg",
-  //     "name": "st ch",
-  //   },
-  // }
   
   onSend(messages = []) {
     this.socket.emit('chat', messages[0])
@@ -91,8 +67,6 @@ export default class Chatbox extends React.Component {
     //   messages: GiftedChat.append(previousState.messages, messages)
     // }));
   }
-
-  c
   
   renderMessage(props) {
     const {

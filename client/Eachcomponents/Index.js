@@ -35,64 +35,40 @@ class Index extends Component {
   }
 }
 
-const UserConcertStack = createStackNavigator(
-  {
-    UserConcert
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      title: "내 공연!!!!!!"
-    })
-  }
-);
-const TimeTableStack = createStackNavigator(
-  {
-    TimeTable
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      title: "페스티벌 일정표"
-    })
-  }
-);
-const MapStack = createStackNavigator(
-  {
-    Map
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      title: "지도"
-    })
-  }
-);
-const ChatboxStack = createSwitchNavigator(
-  {
-    Chatbox
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      title: "채팅"
-    })
-  }
-);
-const SettingStack = createSwitchNavigator(
-  {
-    Setting
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      title: "환경설정"
-    })
-  }
-);
+// const UserConcertStack = createSwitchNavigator(
+//   {
+//     UserConcert
+//   }
+// );
+// const TimeTableStack = createSwitchNavigator(
+//   {
+//     TimeTable
+//   }
+// );
+// const MapStack = createSwitchNavigator(
+//   {
+//     Map
+//   }
+// );
+// const ChatboxStack = createSwitchNavigator(
+//   {
+//     Chatbox
+//   }
+// );
+// const SettingStack = createSwitchNavigator(
+//   {
+//     Setting
+//   }
+// );
+
 
 const TabNavigator = createBottomTabNavigator(
   {
-    UserConcert: UserConcertStack,
-    TimeTable: TimeTableStack,
-    Map: MapStack,
-    Chatbox: ChatboxStack,
-    Setting: SettingStack
+    UserConcert: UserConcert,
+    TimeTable: TimeTable, 
+    Map: Map,
+    Chatbox: Chatbox,
+    Setting: Setting,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

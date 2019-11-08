@@ -34,7 +34,6 @@ export default class TimeLine extends Component {
     this.renderCircle = this._renderCircle.bind(this);
     this.renderEvent = this._renderEvent.bind(this);
     this._timeGapCalculator = this._timeGapCalculator.bind(this);
-    this._dynamicLineLength = this._dynamicLineLength.bind(this);
     this._showConcertInfos = this._showConcertInfos.bind(this);
 
     this.state = {
@@ -290,8 +289,6 @@ export default class TimeLine extends Component {
 
     return Math.abs(endTime - startTime);
   } //ratio 24h = 100%
-
-  _dynamicLineLength(timeGap) {}
 
   _showConcertInfos(artistName, description, starttime, endtime) {
     Alert.alert(

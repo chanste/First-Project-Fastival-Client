@@ -129,7 +129,7 @@ class MainScreen extends React.Component {
 
   render() {
     const datas = this.state.userFestivals;
-    for (const item of datas) {
+    for (const item in datas) {
       item.refresh = this.refresh;
     }
     return this.state.userFestivals.length === 0 ? (
@@ -154,7 +154,7 @@ class MainScreen extends React.Component {
             marginBottom: 10,
             fontSize: 20,
             fontWeight: "700",
-            opacity: 0.3
+            opacity: 0.1 
           }}
         >
           My Festival List

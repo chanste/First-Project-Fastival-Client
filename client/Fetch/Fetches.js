@@ -16,7 +16,7 @@ export const addUserFestival = (user_Id, festival_Id) => {
     },
     body: JSON.stringify(body)
   }).then(response => response.json());
-}; //문제 있음
+};
 
 export const getUserFestivals = (user_Id, callback) => {
   fetch(server + "festivals/" + user_Id)

@@ -11,8 +11,6 @@ import {
 import Adder from "../Eachcomponents/Adder";
 import firebase from "firebase";
 
-//Get [{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
-
 export default class SearchPage extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +18,6 @@ export default class SearchPage extends Component {
   }
 
   state = {
-    // search: this.props.searchValue
     search: "",
     datas: [],
     currDatas: [],
@@ -29,12 +26,14 @@ export default class SearchPage extends Component {
     userId: ""
   };
 
+  //검색어 입력시 검색창 state  변경
   _updateSearch = search => {
     this.setState({ search });
     this.textSearching(search);
   };
 
   componentDidMount() {
+    //컴포넌트 로드 완료 후 _updateSearch함수를 updateSearch라는 이름으로 네비게이션의 param으로 등록.
     this.props.navigation.setParams({
       updateSearch: this._updateSearch
     });
@@ -52,13 +51,14 @@ export default class SearchPage extends Component {
       headerRight: () => (
         <TextInput
           placeholder="Find more Festivals"
-          onChangeText={navigation.getParam("updateSearch")}
+          onChangeText={navigation.getParam("updateSearch")} //네비게이션 param으로 등록되어있는 _updateSearch함수를 불러온다.
           style={{ width: 328, height: 30 }}
         />
       )
     };
   };
 
+  //검색어에 맞는 페스티벌 필터링
   textSearching(text) {
     let currDatas = this.props.screenProps.festivals;
     let filteredList = currDatas.filter(item => {

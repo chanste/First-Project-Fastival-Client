@@ -9,6 +9,7 @@ import {
   Alert
 } from "react-native";
 import { addUserConcert, deleteUserConcert } from "../Fetch/Fetches";
+import { Icon } from "react-native-elements";
 
 const ds = new ListView.DataSource({
   rowHasChanged: (r1, r2) => r1 !== r2,
@@ -198,16 +199,14 @@ export default class TimeLine extends Component {
                 addUserConcert(this.state.user_Id, rowData.concert_Id);
                 Alert.alert("", "콘서트가 추가되었습니다.");
               }}
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: 20,
+                height: 20
+              }}
             >
-              <Text
-                style={{
-                  fontSize: 10,
-                  paddingLeft: 5,
-                  paddingRight: 5
-                }}
-              >
-                ➕
-              </Text>
+              <Icon name="plus" type="font-awesome" size={11} />
             </TouchableOpacity>
           ) : (
             <Text></Text>
@@ -218,16 +217,14 @@ export default class TimeLine extends Component {
                 deleteUserConcert(this.state.user_Id, rowData.concert_Id);
                 Alert.alert(`콘서트가 삭제되었습니다.`);
               }}
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: 20,
+                height: 20
+              }}
             >
-              <Text
-                style={{
-                  fontSize: 10,
-                  paddingLeft: 5,
-                  paddingRight: 5
-                }}
-              >
-                ⛔
-              </Text>
+              <Icon name="minus" type="font-awesome" size={10} />
             </TouchableOpacity>
           ) : (
             <Text></Text>

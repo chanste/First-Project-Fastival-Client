@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import { deleteUserFestival } from "../Fetch/Fetches";
+import { Icon } from "react-native-elements";
 
 export default class Remover extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class Remover extends Component {
   render() {
     return (
       <TouchableOpacity style={Styles.button} onPress={this.rmUserFestival}>
-        <Text style={Styles.text}>제거</Text>
+        <Icon name="minus" type="font-awesome" size={10} />
       </TouchableOpacity>
     );
   }
@@ -36,11 +37,16 @@ export default class Remover extends Component {
 const Styles = StyleSheet.create({
   button: {
     backgroundColor: "#f1f3f5",
-    borderRadius: 5
+    borderRadius: 5,
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    alignItems: "center"
   },
   text: {
-    fontSize: 10,
+    fontSize: 15,
     opacity: 0.7,
-    padding: 5
+    padding: 5,
+    fontWeight: "700"
   }
 });

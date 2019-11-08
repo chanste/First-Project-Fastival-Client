@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { TouchableOpacity, StyleSheet, Text, Alert } from "react-native";
 import { addUserFestival } from "../Fetch/Fetches";
+import { Icon } from "react-native-elements";
 
 export default class Adder extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class Adder extends Component {
   render() {
     return (
       <TouchableOpacity style={Styles.button} onPress={this.addUserFestival}>
-        <Text style={Styles.text}>추가</Text>
+        <Icon name="plus" type="font-awesome" size={11} />
       </TouchableOpacity>
     );
   }
@@ -26,7 +27,11 @@ export default class Adder extends Component {
 const Styles = StyleSheet.create({
   button: {
     backgroundColor: "#f1f3f5",
-    borderRadius: 5
+    borderRadius: 5,
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    alignItems: "center"
   },
   text: {
     fontSize: 10,

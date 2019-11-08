@@ -39,11 +39,10 @@ export const deleteUserFestival = (user_Id, festival_Id) => {
 };
 
 export const addUserConcert = (user_Id, concert_Id) => {
-  let body =
-    {
-      user_Id: user_Id,
-      concert_Id: concert_Id
-    };
+  let body = {
+    user_Id: user_Id,
+    concert_Id: concert_Id
+  };
   return fetch(server + "concerts", {
     method: "POST",
     headers: {

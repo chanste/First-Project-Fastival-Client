@@ -20,6 +20,7 @@ export default class TimeLineRender extends Component {
         details={this.props.selectedDayData[item].artist}
         style={styles.style}
         user_Id={firebase.auth().currentUser.uid}
+        removeEvent={this.props.removeEvent}
       />
     );
   }

@@ -15,11 +15,11 @@ import Setting from "../Screens/Setting";
 class Index extends Component {
   constructor(props) {
     super(props);
-    this.changeFestival = this.changeFestival.bind(this)
+    this.changeFestival = this.changeFestival.bind(this);
   }
 
   changeFestival() {
-    this.props.navigation.navigate('FestivalSelect')
+    this.props.navigation.navigate("FestivalSelect");
   }
 
   render() {
@@ -28,7 +28,7 @@ class Index extends Component {
         screenProps={{
           user_Id: this.props.screenProps.user_Id,
           selectedFestival: this.props.screenProps.selectedFestival,
-          changeFestival : this.changeFestival
+          changeFestival: this.changeFestival
         }}
       />
     );
@@ -61,14 +61,13 @@ class Index extends Component {
 //   }
 // );
 
-
 const TabNavigator = createBottomTabNavigator(
   {
     UserConcert: UserConcert,
-    TimeTable: TimeTable, 
+    TimeTable: TimeTable,
     Map: Map,
     Chatbox: Chatbox,
-    Setting: Setting,
+    Setting: Setting
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -76,7 +75,7 @@ const TabNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let icon = "▲";
 
-        if (routeName === "UserConcert") {
+        if (routeName === "My Concert") {
           icon = "❤️";
         } else if (routeName === "TimeTable") {
           icon = "⏱️";

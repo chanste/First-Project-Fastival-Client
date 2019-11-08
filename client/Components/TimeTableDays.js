@@ -88,6 +88,7 @@ export default class TimeTableDays extends Component {
           stages={stages}
           add={this.props.add}
           remove={this.props.remove}
+          removeEvent={this.props.removeEvent}
         />
       </View>
     );

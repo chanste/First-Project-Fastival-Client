@@ -10,6 +10,7 @@ export default class UserConcert extends React.Component {
     this.setSelectedDayData = this.setSelectedDayData.bind(this);
     this.getConcertDatas = this.getConcertDatas.bind(this);
     this.setSortedDatas = this.setSortedDatas.bind(this);
+    this.removeEvent = this.removeEvent.bind(this);
   }
 
   state = {
@@ -19,8 +20,11 @@ export default class UserConcert extends React.Component {
   };
 
   componentDidMount() {
-    console.log("componentDidMount");
     this.getConcertDatas();
+
+    this.focusListener = this.props.navigation.addListener("didFocus", () => {
+      this.getConcertDatas();
+    });
   }
 
   setSelectedDayData(day) {
@@ -34,15 +38,11 @@ export default class UserConcert extends React.Component {
     const user_Id = firebase.auth().currentUser.uid;
     const festival_Id = this.props.screenProps.selectedFestival.festival_Id;
 
-    console.log("getConcertDatas");
-
     getUserConcerts(user_Id, festival_Id, this.setSortedDatas);
   }
 
   setSortedDatas(inputDatas) {
     //data는 먼저 날짜와 무대에 따라서 분류되어야 한다.
-    // console.log("inputData: ", inputDatas);
-    console.log("setSortedDatas");
     let sortedDatas = {};
 
     for (let i = 0; i < inputDatas.length; i++) {
@@ -90,6 +90,16 @@ export default class UserConcert extends React.Component {
     });
   }
 
+  removeEvent(day) {
+    this.getConcertDatas();
+    this.setState({
+      ...this.state,
+      selectedDayData: {}
+    });
+  } //리무브 혹은 에드 버튼이 눌렸을때, 유저 콘서트 리스트 데이터를 새로 받아오고, selectedDayData를 비워야한다.
+  //안그러면, 콘서트 추가 혹은 제거 이후 myConcertPage를 새로 열면 기존에 선택되어있는 selectedDayData의 그래프가 남아있게된다.
+  //day 파라미터는 selectedDayData를 새로 받아오기 위해서인데... 비동기의 문제로 getConcertDatas()를 실행하면 삭제이전의 정보들이 넘어온다.
+
   render() {
     const daysLength = this.state.days.length;
     return (
@@ -100,6 +110,7 @@ export default class UserConcert extends React.Component {
           daysLength={daysLength}
           add={false}
           remove={true}
+          removeEvent={this.removeEvent}
         />
       </View>
     );

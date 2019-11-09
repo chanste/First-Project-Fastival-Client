@@ -11,7 +11,7 @@ class Map extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Image
-          style={{ width: 400, height: 400, borderRadius: 20 }}
+          style={{ width: 400, height: 400, resizeMode: "contain" }}
           source={{ uri: this.props.screenProps.selectedFestival.map_url }}
         />
       </View>

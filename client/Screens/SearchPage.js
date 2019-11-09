@@ -8,7 +8,7 @@ import {
   Image,
   Alert
 } from "react-native";
-import Adder from "../Eachcomponents/Adder";
+import Adder from "../Components/Adder";
 import firebase from "firebase";
 
 export default class SearchPage extends Component {

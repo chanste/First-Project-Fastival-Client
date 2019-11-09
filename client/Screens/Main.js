@@ -10,13 +10,13 @@ import {
 } from "react-native";
 import SearchPage from "./SearchPage";
 import UserConcert from "./UserConcert";
-import Remover from "../Eachcomponents/Remover";
+import Remover from "../Components/Remover";
 
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import firebase from "firebase";
 import { getAllFestivals, getUserFestivals } from "../Fetch/Fetches";
-import Index from "../Eachcomponents/Index";
+import Index from "./Index";
 import { Icon } from "react-native-elements";
 
 //Get=[{festival_Id: int, name: str, img_url: str}, {data2}, {data3}, ....]
@@ -130,9 +130,9 @@ class MainScreen extends React.Component {
   render() {
     const datas = this.state.userFestivals;
     // for (const item of datas) {
-    //   item.refresh = this.refresh;  
+    //   item.refresh = this.refresh;
     // }
-    for (let i=0; i<datas.length; i++){
+    for (let i = 0; i < datas.length; i++) {
       datas[i].refresh = this.refresh;
     }
 
@@ -158,7 +158,7 @@ class MainScreen extends React.Component {
             marginBottom: 10,
             fontSize: 20,
             fontWeight: "700",
-            opacity: 0.1 
+            opacity: 0.1
           }}
         >
           My Festival List

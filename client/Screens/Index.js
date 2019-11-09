@@ -4,11 +4,11 @@ import firebase from "firebase";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import UserConcert from "../Screens/UserConcert";
-import Map from "../Screens/Map";
-import Chatbox from "../Screens/Chatbox";
-import TimeTable from "../Screens/TimeTable";
-import Setting from "../Screens/Setting";
+import UserConcert from "./UserConcert";
+import Map from "./Map";
+import Chatbox from "./Chatbox";
+import TimeTable from "./TimeTable";
+import Setting from "./Setting";
 
 //<Button title="Sign out" onPress={() => firebase.auth().signOut()} />
 

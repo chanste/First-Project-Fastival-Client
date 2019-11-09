@@ -207,9 +207,7 @@ export default class TimeLine extends Component {
             >
               <Icon name="plus" type="font-awesome" size={11} />
             </TouchableOpacity>
-          ) : (
-            <Text></Text>
-          )}
+          ) : null}
           {this.props.removeButton ? (
             <TouchableOpacity
               onPress={() => {

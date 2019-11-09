@@ -104,14 +104,32 @@ export default class UserConcert extends React.Component {
     const daysLength = this.state.days.length;
     return (
       <View>
-        <TimeTableDays
-          timeTableStates={this.state}
-          setSelectedDayData={this.setSelectedDayData}
-          daysLength={daysLength}
-          add={false}
-          remove={true}
-          removeEvent={this.removeEvent}
-        />
+        {this.state.days.length === 0 ? (
+          <View
+            style={{
+              marginTop: 350,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Text
+              style={{
+                opacity: 0.4
+              }}
+            >
+              당신의 콘서트를 추가해주세요!
+            </Text>
+          </View>
+        ) : (
+          <TimeTableDays
+            timeTableStates={this.state}
+            setSelectedDayData={this.setSelectedDayData}
+            daysLength={daysLength}
+            add={false}
+            remove={true}
+            removeEvent={this.removeEvent}
+          />
+        )}
       </View>
     );
   }

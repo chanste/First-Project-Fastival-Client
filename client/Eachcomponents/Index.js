@@ -63,7 +63,7 @@ class Index extends Component {
 
 const TabNavigator = createBottomTabNavigator(
   {
-    UserConcert: UserConcert,
+    MyConcert: UserConcert,
     TimeTable: TimeTable,
     Map: Map,
     Chatbox: Chatbox,
@@ -75,7 +75,7 @@ const TabNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let icon = "▲";
 
-        if (routeName === "My Concert") {
+        if (routeName === "MyConcert") {
           icon = "❤️";
         } else if (routeName === "TimeTable") {
           icon = "⏱️";

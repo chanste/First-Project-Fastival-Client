@@ -105,6 +105,8 @@ export default class TimeTable extends Component {
           timeTableStates={this.state}
           setSelectedDayData={this.setSelectedDayData}
           daysLength={daysLength}
+          add={true}
+          remove={false}
         />
       </View>
     );

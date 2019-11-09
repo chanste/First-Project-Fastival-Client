@@ -214,6 +214,7 @@ export default class TimeLine extends Component {
             <TouchableOpacity
               onPress={() => {
                 deleteUserConcert(this.state.user_Id, rowData.concert_Id);
+                this.props.removeEvent(rowData.con_day);
                 Alert.alert(`콘서트가 삭제되었습니다.`);
               }}
               style={{

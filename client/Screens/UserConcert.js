@@ -117,7 +117,7 @@ export default class UserConcert extends React.Component {
                 opacity: 0.4
               }}
             >
-              당신의 콘서트를 추가해주세요!
+              당신의 콘서트를 추가해 주세요!
             </Text>
           </View>
         ) : (

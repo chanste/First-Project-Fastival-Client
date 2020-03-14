@@ -27,42 +27,42 @@ To use this app like regular apps on play store, you have to install your own go
 
 ### Login
 
-![LoginPage](./fastival/LogInPage.jpg)
+![LoginPage](./Fastival/LogInPage.jpg)
 
 This is Log in page. you can just sign in to this app by using your google account.
 
 ### UserFestival
 
-![UserFestival](./fastival/UserFestival.jpg)
+![UserFestival](./Fastival/UserFestival.jpg)
 
 your festival list
 
 ### SearchFestivals
 
-![SearchFestivals](./fastival/SearchFestivals.jpg)
+![SearchFestivals](./Fastival/SearchFestivals.jpg)
 
 This is searchpage. find your festival here!
 
 ### UserConcert
 
-![UserConcert](./fastival/UserConcert.jpg)
+![UserConcert](./Fastival/UserConcert.jpg)
 
 your concert list
 
 ### TimeTable
 
-![TimeTable](./fastival/TimeTable.jpg)
+![TimeTable](./Fastival/TimeTable.jpg)
 
 concerts lists
 
 ### Map
 
-![Map](./fastival/Map.jpg)
+![Map](./Fastival/Map.jpg)
 
 map
 
 ### Setting
 
-![Setting](./fastival/Setting.jpg)
+![Setting](./Fastival/Setting.jpg)
 
 ToMainPage(userFestival) button and LogOut button
